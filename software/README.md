@@ -32,3 +32,13 @@ brew install pipenv
 ```
 
 ## Using [Pipenv](https://pipenv.readthedocs.io/)
+
+- Sometimes, locale shell variable could cause problems. If so, you may want to add the following lines to the end of `~/.bash_profile`.
+```bash
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+```
+- To install a new dependency, such as `scikit-learn`, run
+```bash
+pipenv install scikit-learn
+```
