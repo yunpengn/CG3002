@@ -42,3 +42,11 @@ export LC_ALL=en_US.UTF-8
 ```bash
 pipenv install scikit-learn
 ```
+- To use the packages installed, run
+```bash
+pipenv run python XXX.py
+```
+- Alternatively, you can spawn a new shell under an environment such that all dependencies are loaded
+```bash
+pipenv shell
+```
