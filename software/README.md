@@ -1,0 +1,34 @@
+# Software Component
+
+We are using [Pipenv](https://pipenv.readthedocs.io/) to manage our dependencies, which is the latest tool in Python's world that combines the aabilities of [pip](https://pypi.org/project/pip/) and [virtualenv](https://virtualenv.pypa.io/).
+
+## Installation of [Pipenv](https://pipenv.readthedocs.io/)
+
+_Notice: The guide below is for MacOS only._
+
+- Make sure you have Python installed.
+```bash
+python --version
+```
+or
+```bash
+python3 --version
+```
+- Make sure you have pip installed.
+```bash
+pip --version
+```
+or
+```bash
+pip3 --version
+```
+- Make sure you have [Homebrew]() installed.
+```bash
+brew -v
+```
+- Install Pipenv now.
+```bash
+brew install pipenv
+```
+
+## Using [Pipenv](https://pipenv.readthedocs.io/)
