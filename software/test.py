@@ -21,4 +21,4 @@ classifier = Classifier("../models/sample_kaggle.pkl")
 ########################################
 
 preprocessor = Preprocessor(['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'], 'Voltage')
-X_train, X_test, y_train, y_test = preprocessor.prepare('data/stationary_sample.csv')
+input = preprocessor.prepare_predict('data/stationary_sample.csv')
