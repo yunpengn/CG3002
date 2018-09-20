@@ -53,4 +53,7 @@ pipenv shell
 
 ## Style Guide & Standard
 
-We will strictly follow Python's official style guide as specified [here](https://www.python.org/dev/peps/pep-0008/).
+We will strictly follow Python's official style guide as specified [here](https://www.python.org/dev/peps/pep-0008/). Why? Because [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) thinks so.
+
+- Use 4 spaces per indentation level (spaces are the preferred indentation method).
+- 

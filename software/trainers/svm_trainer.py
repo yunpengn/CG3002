@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn import metrics
 
-class Trainer:
+class SvmTrainer:
 	def __init__(self, data_path):
 		self.dataset = panda.read_csv(data_path, sep = ',')
 		self.classifier = SVC()
@@ -33,9 +33,3 @@ class Trainer:
 		print("Going to save the model to persistence layer.")
 		joblib.dump(self.classifier, model_path)
 		print("Model successfully saved at %s" % model_path)
-
-trainer = Trainer('../data/run_or_walk.csv')
-trainer.prepare(['acceleration_x', 'acceleration_y', 'acceleration_z', 'wrist'], 'activity')
-trainer.train()
-trainer.evaluate()
-trainer.save('../models/sample_kaggle.pkl')
