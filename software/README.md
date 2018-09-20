@@ -50,3 +50,7 @@ pipenv run python XXX.py
 ```bash
 pipenv shell
 ```
+
+## Style Guide & Standard
+
+We will strictly follow Python's official style guide as specified [here](https://www.python.org/dev/peps/pep-0008/).

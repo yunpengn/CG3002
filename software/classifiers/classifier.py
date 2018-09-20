@@ -9,4 +9,4 @@ class Classifier:
 	def predict(input):
 		return model.predict(input)
 
-my = Classifier("models/sample_kaggle.pkl")
+my = Classifier("../models/sample_kaggle.pkl")
