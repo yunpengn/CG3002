@@ -1,6 +1,6 @@
 # Software Component
 
-We are using [Pipenv](https://pipenv.readthedocs.io/) to manage our dependencies, which is the latest tool in Python's world that combines the aabilities of [pip](https://pypi.org/project/pip/) and [virtualenv](https://virtualenv.pypa.io/).
+We are using [Pipenv](https://pipenv.readthedocs.io/) to manage our dependencies, which is the latest tool in Python's world that combines the abilities of [pip](https://pypi.org/project/pip/) and [virtualenv](https://virtualenv.pypa.io/).
 
 ## Installation of [Pipenv](https://pipenv.readthedocs.io/)
 
@@ -50,3 +50,9 @@ pipenv run python XXX.py
 ```bash
 pipenv shell
 ```
+
+## Style Guide & Standard
+
+We will strictly follow Python's official style guide as specified [here](https://www.python.org/dev/peps/pep-0008/). Why? Because [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) thinks so.
+
+- Use 4 spaces per indentation level (spaces are the preferred indentation method).
