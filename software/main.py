@@ -8,7 +8,7 @@ if __name__ != '__main__':
 	exit(1)
 
 # Reads the model first and creates a preprocessor and an accumulator.
-accumulator = ResultAccumulator(range(11))
+accumulator = ResultAccumulator(range(12))
 classifier = Classifier("models/sample_kaggle.pkl")
 preprocessor = Preprocessor(['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'], 'Voltage')
 
@@ -23,14 +23,16 @@ while True:
 
 	# Accumulates the result and sees whether it reaches the threshold.
 	if accumulator.add(result):
-		# [TODO] Send the result to the remove server
-
 		# Clears the accumulator.
 		accumulator.clear()
 
 		# Exits from the loop if this is the logout action.
-		if result == 10:
+		if result == 11:
 			break
+		elif result == 10:
+			print("Detected as stationary state")
+		else
+			# [TODO] Send the result to the remove server
 
 	# Sleeps for a certain period to wait for the next iteration to begin.
 	sleep(0.1)
