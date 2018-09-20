@@ -2,6 +2,7 @@ from sklearn.externals import joblib
 from sklearn.svm import SVC
 from sklearn import metrics
 
+# SVM in sk-learn supports multi-class according to a one-vs-one scheme.
 class SvmTrainer:
 	def __init__(self):
 		self.classifier = SVC()

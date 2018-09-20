@@ -2,6 +2,7 @@ from sklearn.externals import joblib
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 
+# kNN naturally supports multi-class classification.
 class KnnTrainer:
 	def __init__(self, n_neighbors):
 		self.classifier = KNeighborsClassifier(n_neighbors = n_neighbors)

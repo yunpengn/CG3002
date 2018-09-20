@@ -2,6 +2,7 @@ from sklearn.externals import joblib
 from sklearn.neural_network import MLPClassifier
 from sklearn import metrics
 
+# Multi-layer perceptron naturally supports multi-class classification
 class AnnTrainer:
 	def __init__(self, alpha):
 		self.classifier = MLPClassifier(solver = 'lbfgs', alpha = alpha, hidden_layer_sizes =(5, 2), random_state = 1)

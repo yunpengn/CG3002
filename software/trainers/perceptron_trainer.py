@@ -2,6 +2,7 @@ from sklearn.externals import joblib
 from sklearn.linear_model import Perceptron
 from sklearn import metrics
 
+# Perceptron in sk-learn supports multi-class according to a one-vs-all scheme.
 class PerceptronTrainer:
 	def __init__(self, max_iter):
 		self.classifier = Perceptron(tol = None, max_iter = max_iter)
