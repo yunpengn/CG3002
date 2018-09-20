@@ -4,7 +4,7 @@ from utils.result_accumulator import ResultAccumulator
 
 # Reads the model first and creates a preprocessor and an accumulator.
 accumulator = ResultAccumulator(range(11))
-classifier = Classifier("../models/sample_kaggle.pkl")
+classifier = Classifier("models/sample_kaggle.pkl")
 preprocessor = Preprocessor(['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'], 'Voltage')
 
 while True:
@@ -12,7 +12,7 @@ while True:
 	print("Enter a new iteration of capturing: ", time.time())
 
 	# Predicts the output according to the input.
-	input = preprocessor.prepare_predict('data/stationary_sample.csv')
+	input = preprocessor.prepare_predict("data/stationary_sample.csv")
 	result = classifier.predict(input)
 	print("The prediction result is", result)
 
