@@ -23,3 +23,22 @@ class KnnTrainer:
 		print("Going to save the model to persistence layer.")
 		joblib.dump(self.classifier, model_path)
 		print("Model successfully saved at %s" % model_path)
+
+	def find_best_knn_value(self, X, y):
+		max_knn_value = 1
+		max_score = 0
+		neighbors = np.arange(1,9)
+
+		for i,x in enumerate(neighbors):
+		    classifier = KNeighborsClassifier(n_neighbors=x)
+		    classifier.fit(X, y)
+		    prediction_score = classifier.predict(X_test)
+
+		    if max_score < classifier.score(X_test, y_test):
+		        max_knn_value = x
+		        max_score = classifier.score(X_test, y_test)
+		        max_prediction_score = prediction_score 
+
+		print("\nThe best value of k is:\n%s" % max_knn_value)
+		print("\nThe max classification score is:\n%s" % max_score)
+		return max_knn_value
