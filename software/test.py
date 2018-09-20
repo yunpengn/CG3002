@@ -1,6 +1,6 @@
 from classifiers.classifier import Classifier
-from trainers.svm_trainer import SvmTrainer
 from preprocess.preprocessor import Preprocessor
+from trainers.svm_trainer import SvmTrainer
 
 ########################################
 # Test for run or walk
@@ -22,3 +22,4 @@ classifier = Classifier("../models/sample_kaggle.pkl")
 
 preprocessor = Preprocessor(['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'], 'Voltage')
 input = preprocessor.prepare_predict('data/stationary_sample.csv')
+print(input)

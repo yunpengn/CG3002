@@ -1,6 +1,11 @@
 from classifiers.classifier import Classifier
+from preprocess.preprocessor import Preprocessor
 from time import time, sleep
 from utils.result_accumulator import ResultAccumulator
+
+if __name__ != '__main__':
+	print("This module must be run as the main module.")
+	exit(1)
 
 # Reads the model first and creates a preprocessor and an accumulator.
 accumulator = ResultAccumulator(range(11))
@@ -9,7 +14,7 @@ preprocessor = Preprocessor(['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'le
 
 while True:
 	# Starts a new iteration with current time printed out.
-	print("Enter a new iteration of capturing: ", time.time())
+	print("Enter a new iteration of capturing: ", time())
 
 	# Predicts the output according to the input.
 	input = preprocessor.prepare_predict("data/stationary_sample.csv")
@@ -28,7 +33,7 @@ while True:
 			break
 
 	# Sleeps for a certain period to wait for the next iteration to begin.
-	time.sleep(0.1)
+	sleep(0.1)
 
 print("Thanks for using the DanceDance system!")
 exit()

@@ -19,4 +19,6 @@ class Preprocessor:
 
 	def prepare_predict(self, data_path):
 		# First read the data from CSV file format to panda dataframe format.
-		dataset = panda.read_csv(data_path, sep = ',')
+		dataset = panda.read_csv(data_path, sep = ', ')
+		# Gets the average of the columns we need.
+		return np.array([dataset[column].mean() for column in self.X_columns])
