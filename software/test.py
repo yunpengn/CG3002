@@ -1,6 +1,7 @@
 from classifiers.classifier import Classifier
 from preprocess.preprocessor import Preprocessor
 from trainers.svm_trainer import SvmTrainer
+from trainers.knn_trainer import KnnTrainer
 
 ########################################
 # Test for run or walk
@@ -23,3 +24,16 @@ classifier = Classifier("../models/sample_kaggle.pkl")
 preprocessor = Preprocessor(['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'], 'Voltage')
 input = preprocessor.prepare_predict('data/stationary_sample.csv')
 print(input)
+
+########################################
+# Test for raw movement dataset
+########################################
+
+preprocessor = Preprocessor(['x1', 'y1', 'z1', 'x2', 'y2', 'z2', 'x3', 'y3', 'z3'], 'class')
+input = preprocessor.prepare_predict('data/raw_movement_dataset.csv')
+
+trainer = KnnTrainer()
+#Note: Can choose to call this inside the class itself
+knn_value = trainer.find_best_knn_value()
+trainer.train(X_train, y_train, knn_value)
+trainer.evaluate(X_test, y_test)
