@@ -62,4 +62,5 @@ X, y = preprocessor.read_raw('data/raw/old_raw_sample.csv', ['x', 'y', 'z'])
 X_train, X_test, y_train, y_test = preprocessor.split(X, y)
 
 trainer = SvmTrainer()
-trainer.train(X, y)
+trainer.train(X_train, y_train)
+trainer.evaluate(X_test, y_test)
