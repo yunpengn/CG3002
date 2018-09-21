@@ -15,10 +15,10 @@ class Preprocessor:
 		data_X = dataset[self.X_columns].copy()
 		data_y = dataset[self.y_column].copy()
 
-		return split(data_X, data_y, test_size = 0.2)
+		return train_test_split(data_X, data_y, test_size = test_size, random_state = 0)
 
-	def split(data_X, data_y, test_size = 0.2):
-		return train_test_split(data_X, data_y, test_size = 0.2, random_state = 0)
+	def split(data_X, data_y, split_size = 0.2):
+		return train_test_split(data_X, data_y, test_size = split_size, random_state = 0)
 
 	def prepare_predict(self, data_path):
 		# First read the data from CSV file format to panda dataframe format.
@@ -59,3 +59,6 @@ class Preprocessor:
 			y[self.y_column].append(dataset[self.y_column][start])
 
 		return panda.DataFrame(data = X), panda.DataFrame(data = y)
+
+	def save(dataset, data_path):
+		dataset.to_csv(data_path, sep = ',')

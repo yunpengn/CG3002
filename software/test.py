@@ -59,7 +59,7 @@ classifier = Classifier("models/old_sample.pkl")
 
 preprocessor = Preprocessor(['meanX', 'meanY', 'meanY'], 'label')
 X, y = preprocessor.read_raw('data/raw/old_raw_sample.csv', ['x', 'y', 'z'])
-# X_train, X_test, y_train, y_test = preprocessor.split(X, y)
+X_train, X_test, y_train, y_test = preprocessor.split(X, y)
 
 trainer = SvmTrainer()
 trainer.train(X, y)
