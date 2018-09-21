@@ -70,6 +70,6 @@ void Sensor_lib::read_power_data(float *voltage, float *current) {
 	int raw_current = analogRead(CURRENT_IN);
     int raw_voltage = analogRead(VOLTAGE_IN);
 
-    *current = raw_current * 1.0 / (0.5 * 10.0);
-    *voltage = raw_voltage * (5.0 / 1023.0); // TODO calibration value need to be changed.
+    *current = raw_current * (5.0 / 1023.0); //* 1000.0 / (0.1 * 10000.0);
+    *voltage = raw_voltage * (5.0 / 1023.0) * (81.58 + 81.28) / 81.28; // TODO calibration value need to be changed.
 }
