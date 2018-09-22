@@ -1,6 +1,9 @@
 # Mac OS-specific file
 .DS_Store
 
+# PyCharm IDE-specific file
+.idea/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
