@@ -1,12 +1,12 @@
 class ResultAccumulator:
-	def __init__(self, outputs, threshold = 10):
-		self.counter = { key:0 for key in outputs }
-		self.outputs = outputs
-		self.threshold = threshold
+    def __init__(self, outputs, threshold=10):
+        self.counter = {key: 0 for key in outputs}
+        self.outputs = outputs
+        self.threshold = threshold
 
-	def add(self, type):
-		self.counter[type] += 1
-		return self.counter[type] >= threshold
+    def add(self, label):
+        self.counter[label] += 1
+        return self.counter[label] >= self.threshold
 
-	def clear(self):
-		self.counter = { key:0 for key in outputs }
+    def clear(self):
+        self.counter = {key: 0 for key in self.outputs}
