@@ -4,22 +4,19 @@
  * and open the template in the editor.
  */
 
-/* 
- * File:   main.cpp
- * Author: Ang Zhi Yuan
- *
- * Created on 19 September, 2018, 12:42 PM
- */
-
 #include <cstdlib>
 #include <stdio.h>
 #include <string.h>
-#include <thread>
 #include <unistd.h>			//Used for UART
 #include <fcntl.h>			//Used for UART
 #include <termios.h>
+#include "ArduinoCommunication.hpp"
+#include "DataPacketUtilities.hpp"
 
 using namespace std;
+
+int uartFilestream  = -1;
+DataBuffer * packetBuffer;
 
 int setupUart() {
     //-------------------------
@@ -67,56 +64,95 @@ int setupUart() {
     return uart0_filestream;
 }
 
-int uartFilestream  = -1;
+const char HEADER[6] = {'H','e','a','d','e','r'};
+
+void initComms() {
+    uartFilestream = setupUart();
+    packetBuffer = (DataBuffer*)malloc(sizeof(DataBuffer));
+    packetBuffer->bufferSize = 500;
+    packetBuffer->startIndex = 0;
+    packetBuffer->endIndex = 0;
+    packetBuffer->dataPacketPtrArray = (DataPacket**)malloc(500 * sizeof(DataPacket*));
+}
+
+void populatePacket(DataPacket * target, char * dataPtr) {
+    float * dataPointer = (float *) dataPtr;
+    target->voltage = *dataPointer++;
+    target->current = *dataPointer++;
+    target->bodyX = *dataPointer++;
+    target->bodyY = *dataPointer++;
+    target->bodyZ = *dataPointer++;
+    target->handAcclX = *dataPointer++;
+    target->handAcclY = *dataPointer++;
+    target->handAcclZ = *dataPointer++;
+    target->handGyroX = *dataPointer++;
+    target->handGyroY = *dataPointer++;
+    target->handGyroZ = *dataPointer++;
+    target->legAcclX = *dataPointer++;
+    target->legAcclY = *dataPointer++;
+    target->legAcclZ = *dataPointer++;
+    target->legGyroX = *dataPointer++;
+    target->legGyroY = *dataPointer++;
+    target->legGyroZ = *dataPointer++;
+}
+
+DataPacket * receiveDataPacket(int filestream) {
+    const int dataSize = sizeof(DataPacket);
+    const int crcSize = 4;
+    const int totalSize = dataSize + crcSize;
+    char rawData[dataSize + crcSize];
+    int rx_length = 0;
+    while (rx_length<totalSize) {
+        rx_length += read(filestream, rawData + rx_length, totalSize - rx_length);
+    }
+    DataPacket * result = (DataPacket*)malloc(sizeof(DataPacket));
+    populatePacket(result, rawData);
+    return result;
+}
+
+int shouldStop = 0;
 
 void receiver() {
     if (uartFilestream == -1)
         return;
     //----- CHECK FOR ANY RX BYTES -----
     // Read up to 255 characters from the port if they are there
-    unsigned char rx_buffer[256];
-    while (1) {
-        int rx_length = read(uartFilestream, (void*)rx_buffer, 255);		//Filestream, buffer to store in, number of bytes to read (max)
-        if (rx_length > 0) {
-            //Bytes received
-            rx_buffer[rx_length] = '\0';
-            printf("%s\n", rx_buffer);
-        }
-    }
-}
-
-void sender() {
-    if (uartFilestream == -1) {
-        return;
-    }
-    char tx_buffer[256] = "Hello World\n";
-    printf("Sent hello world\n");
-//    while (1) {
-//        write(uartFilestream, tx_buffer, strlen(tx_buffer));
-//    }
-    while(fgets(tx_buffer, 256 , stdin) != NULL)
-    {
-        int count = write(uartFilestream, tx_buffer, strlen(tx_buffer));		//Filestream, bytes to write, number of bytes to write
-        printf("Sent %s", tx_buffer);
-        if (count < 0) {
-                printf("UART TX error\n");
+    unsigned char header_buffer[sizeof(HEADER)];
+    while (!shouldStop) {
+        int rx_length = read(uartFilestream, header_buffer, 1);		//Filestream, buffer to store in, number of bytes to read (max)
+        if (header_buffer[0]==HEADER[0]) {
+            rx_length += read(uartFilestream, header_buffer + 1, sizeof(HEADER)-1);
+            if (rx_length!=sizeof(HEADER))
+                continue;
+            else if (memcmp(HEADER, header_buffer, sizeof(HEADER)) == 0) {
+                DataPacket * data = receiveDataPacket(uartFilestream);
+                addPacket(packetBuffer, data);
+            } else {
+                printf("Invalid header(%d bytes): ", rx_length);
+                for (int i = 0; i < rx_length; i++) 
+                    printf("%c",header_buffer[i]);
+                printf("\n");
+            }
         }
     }
     return;
 }
 
-/*
- * 
- */
-int main(int argc, char** argv) {
-    uartFilestream = setupUart();
-    printf("Set up UART filestream\n");
-    thread first (receiver);     // spawn new thread that calls foo()
-    thread second (sender);  // spawn new thread that calls bar(0)
-    
-    // synchronize threads:
-    first.join();                // pauses until first finishes
-    second.join();               // pauses until second finishes
-    return 0;
+void signalStop(){
+    shouldStop = 1;
 }
 
+void closeComms() {
+    close(uartFilestream);
+}
+
+void sendChar(char c) {
+    if (uartFilestream == -1) 
+        return;
+    else {
+        int count = write(uartFilestream, &c, 1);		//Filestream, bytes to write, number of bytes to write
+        if (count < 0)
+            printf("UART TX error\n");
+    }
+    return;
+}
