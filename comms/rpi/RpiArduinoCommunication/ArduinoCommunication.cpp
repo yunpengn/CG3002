@@ -10,6 +10,7 @@
 #include <unistd.h>			//Used for UART
 #include <fcntl.h>			//Used for UART
 #include <termios.h>
+#include <boost/crc.hpp>
 #include "ArduinoCommunication.hpp"
 #include "DataPacketUtilities.hpp"
 
@@ -106,8 +107,13 @@ DataPacket * receiveDataPacket(int filestream) {
         rx_length += read(filestream, rawData + rx_length, totalSize - rx_length);
     }
     DataPacket * result = (DataPacket*)malloc(sizeof(DataPacket));
-    populatePacket(result, rawData);
-    return result;
+    uint32_t expectedCrc = *(rawData+dataSize);
+    boost::crc_32_type crcCalc;
+    crcCalc.process_bytes(result, dataSize);
+    if (crcCalc.checksum() == expectedCrc) {
+        populatePacket(result, rawData);
+        return result;
+    } else return NULL;
 }
 
 int shouldStop = 0;
@@ -126,7 +132,9 @@ void receiver() {
                 continue;
             else if (memcmp(HEADER, header_buffer, sizeof(HEADER)) == 0) {
                 DataPacket * data = receiveDataPacket(uartFilestream);
-                addPacket(packetBuffer, data);
+                if (data != NULL) {
+                    addPacket(packetBuffer, data);
+                }
             } else {
                 printf("Invalid header(%d bytes): ", rx_length);
                 for (int i = 0; i < rx_length; i++) 
