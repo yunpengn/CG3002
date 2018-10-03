@@ -20,9 +20,9 @@ inline int max(int a, int b) {
 }
 
 void logToFile(FILE * fp, DataPacket * packet) {
-    milliseconds millis = steady_clock::now() - startTime;
-    fprintf(fp, "%ld, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n", millis,
-            packet->voltage, packet->current, packet->bodyX, packet->bodyY, 
+    long millis =  duration_cast<milliseconds>(steady_clock::now() - startTime).count();
+    fprintf(fp, "%ld, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n", millis,
+            packet->energy, packet->voltage, packet->current, packet->bodyX, packet->bodyY, 
             packet->bodyZ, packet->handAcclX, packet->handAcclY, packet->handAcclZ, 
             packet->handGyroX, packet->handGyroY, packet->handGyroZ, packet->legAcclX, 
             packet->legAcclY, packet->legAcclZ, packet->legGyroX, packet->legGyroY, 
@@ -49,8 +49,8 @@ void addPacket(DataBuffer * buffer, DataPacket * packet) {
 
 void initUtils() {
     debugFp = fopen("dataDump.csv", "w");
-    fprintf(debugFp, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",
-            "Time", "Voltage", "Current", "BodyX", "BodyY", "BodyZ", "handAcclX", "handAcclY",
+    fprintf(debugFp, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",
+            "Time", "Energy", "Voltage", "Current", "BodyX", "BodyY", "BodyZ", "handAcclX", "handAcclY",
             "handAcclZ", "legGyroX", "legGyroY", "legGyroZ", "legAcclX", "legAcclY",
             "legAcclZ", "legGyroX", "legGyroY", "legGyroZ");
     startTime = steady_clock::now();

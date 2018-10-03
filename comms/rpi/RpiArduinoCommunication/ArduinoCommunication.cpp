@@ -78,6 +78,7 @@ void initComms() {
 
 void populatePacket(DataPacket * target, char * dataPtr) {
     float * dataPointer = (float *) dataPtr;
+    target->energy = *dataPointer++;
     target->voltage = *dataPointer++;
     target->current = *dataPointer++;
     target->bodyX = *dataPointer++;
@@ -106,14 +107,21 @@ DataPacket * receiveDataPacket(int filestream) {
     while (rx_length<totalSize) {
         rx_length += read(filestream, rawData + rx_length, totalSize - rx_length);
     }
+    //printf("Bytes received: %d\n", rx_length);
     DataPacket * result = (DataPacket*)malloc(sizeof(DataPacket));
-    uint32_t expectedCrc = *(rawData+dataSize);
+    //printf("Data pointer: %p, ", rawData);
+    char * crcPointer = rawData + dataSize;
+    //printf("CRC pointer: %p\n", crcPointer);
+    uint32_t expectedCrc = *((uint32_t * )crcPointer);
     boost::crc_32_type crcCalc;
-    crcCalc.process_bytes(result, dataSize);
+    crcCalc.process_bytes(rawData, dataSize);
     if (crcCalc.checksum() == expectedCrc) {
         populatePacket(result, rawData);
         return result;
-    } else return NULL;
+    } else {
+        printf("CRC error: Expected 0x%08X, got 0x%08X\n", expectedCrc, crcCalc.checksum());
+        return NULL;
+    }
 }
 
 int shouldStop = 0;
