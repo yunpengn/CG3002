@@ -20,7 +20,7 @@ def encryptText(keyStr, action, voltage, current, power, cumpower):
         (IV + cipherText) encoded in base64 as a UTF-8 String
     """
     plaintext = '|'.join([action, voltage, current, power, cumpower])
-    plaintext = "# " + plaintext
+    plaintext = "#" + plaintext
     paddingRequired = BLOCK_SIZE_BYTES - (len(plaintext)%BLOCK_SIZE_BYTES)
     if paddingRequired != BLOCK_SIZE_BYTES:
         padding = ' ' * paddingRequired
