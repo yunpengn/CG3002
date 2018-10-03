@@ -7,9 +7,12 @@
 #include <cstdlib>
 #include <cmath>
 #include <cstdio>
-#include <ctime>
+#include <chrono>
+
+using namespace std::chrono;
 
 FILE * debugFp;
+steady_clock::time_point startTime;
 
 inline int max(int a, int b) {
     if (a>b) return a;
@@ -17,7 +20,8 @@ inline int max(int a, int b) {
 }
 
 void logToFile(FILE * fp, DataPacket * packet) {
-    fprintf(fp, "%ld, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n", time(NULL),
+    milliseconds millis = steady_clock::now() - startTime;
+    fprintf(fp, "%ld, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n", millis,
             packet->voltage, packet->current, packet->bodyX, packet->bodyY, 
             packet->bodyZ, packet->handAcclX, packet->handAcclY, packet->handAcclZ, 
             packet->handGyroX, packet->handGyroY, packet->handGyroZ, packet->legAcclX, 
@@ -49,6 +53,7 @@ void initUtils() {
             "Time", "Voltage", "Current", "BodyX", "BodyY", "BodyZ", "handAcclX", "handAcclY",
             "handAcclZ", "legGyroX", "legGyroY", "legGyroZ", "legAcclX", "legAcclY",
             "legAcclZ", "legGyroX", "legGyroY", "legGyroZ");
+    startTime = steady_clock::now();
 }
 
 void closeFile() {
