@@ -15,6 +15,7 @@
 #define DATAPACKETFORMAT_HPP
 
 struct DataPacket{
+    float energy;
     float voltage;
     float current;
     float bodyX, bodyY, bodyZ;
