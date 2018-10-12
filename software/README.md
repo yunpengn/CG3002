@@ -1,6 +1,11 @@
 # Software Component
 
-We are using [Pipenv](https://pipenv.readthedocs.io/) to manage our dependencies, which is the latest tool in Python's world that combines the abilities of [pip](https://pypi.org/project/pip/) and [virtualenv](https://virtualenv.pypa.io/).
+**In development environment**, we are using [Pipenv](https://pipenv.readthedocs.io/) to manage our dependencies, which is the latest tool in Python's world that combines the abilities of [pip](https://pypi.org/project/pip/) and [virtualenv](https://virtualenv.pypa.io/).
+
+**In production environment**, we are using [Berry Conda](https://github.com/jjhelmus/berryconda), which is a [conda](https://conda.io/)-based Python package distribution for Raspberry Pi. We do not use the same toolkit as the development environment because
+- Pipenv is actually using virtualenv, which is a virtual environment. This could consume more power and lead to performance degrade.
+- When using pip to install packages (_for Python 3.6 and above_), everything has to be built from source. This could be very slow, given the limited main memory of Raspberry Pi. According to our experiments, it takes around 30 minutes to install `numpy` and around 2 hours to install `pandas`.
+- Please run the script `setup_prod.sh` to automatically setup the production environment.
 
 ## Installation of [Pipenv](https://pipenv.readthedocs.io/)
 
