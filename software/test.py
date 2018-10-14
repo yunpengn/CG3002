@@ -22,6 +22,20 @@ data_lookup_table = {
 		'save_data_path': 'models/raw_dataset_12Oct_sample.pkl',
 		'X_Columns' : ['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'],
 		'Y_Columns' : 'move'
+	},
+	# Consists of moves - sidestep, wipers, turnclap
+	'raw_dataset_12Oct_1a': {
+		'raw_data_path': 'data/raw/raw_dataset_12Oct_1a.csv',
+		'save_data_path': 'models/raw_dataset_12Oct_1a_sample.pkl',
+		'X_Columns' : ['BodyX', 'BodyY', 'BodyZ', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclX', 'legAcclY'],
+		'Y_Columns' : 'move'
+	},
+	# Consists of moves - chicken, number7
+	'raw_dataset_12Oct_1b': {
+		'raw_data_path': 'data/raw/raw_dataset_12Oct_1b.csv',
+		'save_data_path': 'models/raw_dataset_12Oct_1b_sample.pkl',
+		'X_Columns' : ['BodyX', 'BodyY', 'BodyZ', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclX', 'legAcclY'],
+		'Y_Columns' : 'move'
 	}
 }
 
@@ -30,7 +44,7 @@ data_lookup_table = {
 # Test for SVM
 ########################################
 
-dataset = data_lookup_table['raw_dataset_12Oct']
+dataset = data_lookup_table['raw_dataset_12Oct_1a']
 
 preprocessor = Preprocessor(dataset['X_Columns'], dataset['Y_Columns'])
 X_train, X_test, y_train, y_test = preprocessor.prepare_train(dataset['raw_data_path'])
@@ -47,12 +61,12 @@ print(prediction_score)
 # Test for KNN
 ########################################
 
-dataset = data_lookup_table['raw_dataset_12Oct']
+dataset = data_lookup_table['raw_dataset_12Oct_1a']
 
 preprocessor = Preprocessor(dataset['X_Columns'], dataset['Y_Columns'])
+
 X_train, X_test, y_train, y_test = preprocessor.prepare_train(dataset['raw_data_path'])
 max_knn_value = KnnTrainer.find_best_knn_value(X_train, y_train)
-print(max_knn_value)
 trainer = KnnTrainer(max_knn_value)
 trainer.train(X_train, y_train)
 trainer.evaluate(X_test, y_test)

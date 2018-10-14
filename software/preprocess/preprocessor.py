@@ -31,7 +31,7 @@ class Preprocessor:
     # We assume the raw data to be 100Hz.
     def read_raw(self, data_path, X_columns, interval=20, period=50):
         # First read the data from CSV file format to panda dataframe format.
-        dataset = panda.read_csv(data_path, sep=',')
+        dataset = panda.read_csv(data_path, sep=', ')
 
         # Use a dict to store the input.
         X = {}
