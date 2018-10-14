@@ -10,7 +10,7 @@ class Preprocessor:
 
     def prepare_train(self, data_path, test_size=0.2):
         # First read the data from CSV file format to panda dataframe format.
-        dataset = panda.read_csv(data_path, sep=',')
+        dataset = panda.read_csv(data_path, sep=', ')
 
         # Then, only keep the relevant column
         data_X = dataset[self.X_columns].copy()
