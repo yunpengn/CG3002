@@ -32,10 +32,10 @@ print(input)
 preprocessor = Preprocessor(['x1', 'y1', 'z1', 'x2', 'y2', 'z2', 'x3', 'y3', 'z3'], 'class')
 input = preprocessor.prepare_predict('data/raw_movement_dataset.csv')
 
-trainer = KnnTrainer()
-#Note: Can choose to call this inside the class itself
-knn_value = trainer.find_best_knn_value()
-trainer.train(X_train, y_train, knn_value)
+# Note: Can choose to call this inside the class itself
+knn_value = KnnTrainer.find_best_knn_value(X_train, y_train)
+trainer = KnnTrainer(knn_value)
+trainer.train(X_train, y_train)
 trainer.evaluate(X_test, y_test)
 
 ########################################
