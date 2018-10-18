@@ -44,14 +44,14 @@ trainer.evaluate(X_test, y_test)
 
 preprocessor = Preprocessor(['meanX', 'meanY', 'meanY'], 'label')
 X_train, X_test, y_train, y_test = preprocessor.prepare_train('data/old_data.csv')
-trainer = SvmTrainer()
 
 trainer = SvmTrainer()
 trainer.train(X_train, y_train)
 trainer.evaluate(X_test, y_test)
 trainer.save('models/old_sample.pkl')
 
-classifier = Classifier("models/old_sample.pkl")
+# Then define a classifier by supplying the dumped model.
+# classifier = Classifier("models/old_sample.pkl")
 
 ########################################
 # Test for raw data sample
