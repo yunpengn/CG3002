@@ -5,8 +5,9 @@ from sklearn import metrics
 
 # Random forest
 class RandomForestTrainer:
-    def __init__(self, depth_max):
-        self.classifier = RandomForestClassifier(n_estimators=100, max_depth=depth_max, random_state=0)
+    # num_of_jobs determine how many jobs we want to run in parallel (use -1 so that num_of_jobs = # of CPUs)
+    def __init__(self, depth_max, num_of_jobs=1):
+        self.classifier = RandomForestClassifier(n_estimators=100, max_depth=depth_max, random_state=0, n_jobs=num_of_jobs)
 
     def train(self, X, y):
         print("Going to train the model on a training dataset with size %d." % len(X))
