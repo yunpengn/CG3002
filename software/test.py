@@ -49,6 +49,7 @@ dataset = data_lookup_table['raw_dataset_12Oct_1a']
 preprocessor = Preprocessor(dataset['X_Columns'], dataset['Y_Columns'])
 X_train, X_test, y_train, y_test = preprocessor.prepare_train(dataset['raw_data_path'])
 trainer = SvmTrainer()
+
 trainer.train(X_train, y_train)
 trainer.evaluate(X_test, y_test)
 trainer.save(dataset['save_data_path'])
@@ -75,6 +76,3 @@ classifier = Classifier(dataset['save_data_path'])
 prediction_score = classifier.predict(X_test)
 
 print(prediction_score)
-
-
-
