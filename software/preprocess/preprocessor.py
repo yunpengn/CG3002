@@ -10,7 +10,7 @@ class Preprocessor:
 
     def prepare_train(self, data_path, test_size=0.2):
         # First read the data from CSV file format to panda dataframe format.
-        dataset = panda.read_csv(data_path, sep=', ')
+        dataset = panda.read_csv(data_path, sep=',')
 
         # Then, only keep the relevant column
         data_X = dataset[self.X_columns].copy()
@@ -24,14 +24,14 @@ class Preprocessor:
 
     def prepare_predict(self, data_path):
         # First read the data from CSV file format to panda dataframe format.
-        dataset = panda.read_csv(data_path, sep=', ')
+        dataset = panda.read_csv(data_path, sep=',')
         # Gets the average of the columns we need.
         return np.array([dataset[column].mean() for column in self.X_columns])
 
     # We assume the raw data to be 100Hz.
     def read_raw(self, data_path, X_columns, interval=20, period=50):
         # First read the data from CSV file format to panda dataframe format.
-        dataset = panda.read_csv(data_path, sep=', ')
+        dataset = panda.read_csv(data_path, sep=',')
 
         # Use a dict to store the input.
         X = {}
