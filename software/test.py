@@ -3,64 +3,76 @@ from preprocess.preprocessor import Preprocessor
 from trainers.svm_trainer import SvmTrainer
 from trainers.knn_trainer import KnnTrainer
 
-#######################################
-# Test for run or walk
-#######################################
+data_lookup_table = {
 
-preprocessor = Preprocessor(['acceleration_x', 'acceleration_y', 'acceleration_z', 'wrist'], 'activity')
-X_train, X_test, y_train, y_test = preprocessor.prepare_train('data/run_or_walk.csv')
+	'sample_kaggle': {
+		'raw_data_path': 'data/run_or_walk.csv',
+		'save_data_path': 'models/sample_kaggle.pkl',
+		'X_Columns' : ['acceleration_x', 'acceleration_y', 'acceleration_z', 'wrist'],
+		'Y_Columns' : 'activity'
+	},
+	'old_raw_sample': {
+		'raw_data_path': 'data/raw/old_raw_sample.csv',
+		'save_data_path': 'models/old_raw_sample.pkl',
+		'X_Columns' : ['x', 'y', 'z'],
+		'Y_Columns' : 'label'
+	},
+	'raw_dataset_12Oct': {
+		'raw_data_path': 'data/raw/raw_dataset_12Oct.csv',
+		'save_data_path': 'models/raw_dataset_12Oct_sample.pkl',
+		'X_Columns' : ['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'],
+		'Y_Columns' : 'move'
+	},
+	# Consists of moves - sidestep, wipers, turnclap
+	'raw_dataset_12Oct_1a': {
+		'raw_data_path': 'data/raw/raw_dataset_12Oct_1a.csv',
+		'save_data_path': 'models/raw_dataset_12Oct_1a_sample.pkl',
+		'X_Columns' : ['BodyX', 'BodyY', 'BodyZ', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclX', 'legAcclY'],
+		'Y_Columns' : 'move'
+	},
+	# Consists of moves - chicken, number7
+	'raw_dataset_12Oct_1b': {
+		'raw_data_path': 'data/raw/raw_dataset_12Oct_1b.csv',
+		'save_data_path': 'models/raw_dataset_12Oct_1b_sample.pkl',
+		'X_Columns' : ['BodyX', 'BodyY', 'BodyZ', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclX', 'legAcclY'],
+		'Y_Columns' : 'move'
+	}
+}
 
+
+########################################
+# Test for SVM
+########################################
+
+dataset = data_lookup_table['raw_dataset_12Oct_1a']
+
+preprocessor = Preprocessor(dataset['X_Columns'], dataset['Y_Columns'])
+X_train, X_test, y_train, y_test = preprocessor.prepare_train(dataset['raw_data_path'])
 trainer = SvmTrainer()
+
 trainer.train(X_train, y_train)
 trainer.evaluate(X_test, y_test)
-trainer.save('models/sample_kaggle.pkl')
+trainer.save(dataset['save_data_path'])
+classifier = Classifier(dataset['save_data_path'])
+prediction_score = classifier.predict(X_test)
 
-classifier = Classifier("models/sample_kaggle.pkl")
-
-########################################
-# Test for stationary sample data
-########################################
-
-preprocessor = Preprocessor(['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'], 'Voltage')
-input = preprocessor.prepare_predict('data/stationary_sample.csv')
-print(input)
+print(prediction_score)
 
 ########################################
-# Test for raw movement dataset
+# Test for KNN
 ########################################
 
-preprocessor = Preprocessor(['x1', 'y1', 'z1', 'x2', 'y2', 'z2', 'x3', 'y3', 'z3'], 'class')
-input = preprocessor.prepare_predict('data/raw_movement_dataset.csv')
+dataset = data_lookup_table['raw_dataset_12Oct_1a']
 
-# Note: Can choose to call this inside the class itself
-knn_value = KnnTrainer.find_best_knn_value(X_train, y_train)
-trainer = KnnTrainer(knn_value)
+preprocessor = Preprocessor(dataset['X_Columns'], dataset['Y_Columns'])
+
+X_train, X_test, y_train, y_test = preprocessor.prepare_train(dataset['raw_data_path'])
+max_knn_value = KnnTrainer.find_best_knn_value(X_train, y_train)
+trainer = KnnTrainer(max_knn_value)
 trainer.train(X_train, y_train)
 trainer.evaluate(X_test, y_test)
+trainer.save(dataset['save_data_path'])
+classifier = Classifier(dataset['save_data_path'])
+prediction_score = classifier.predict(X_test)
 
-########################################
-# Test for old data
-########################################
-
-preprocessor = Preprocessor(['meanX', 'meanY', 'meanY'], 'label')
-X_train, X_test, y_train, y_test = preprocessor.prepare_train('data/old_data.csv')
-
-trainer = SvmTrainer()
-trainer.train(X_train, y_train)
-trainer.evaluate(X_test, y_test)
-trainer.save('models/old_sample.pkl')
-
-# Then define a classifier by supplying the dumped model.
-# classifier = Classifier("models/old_sample.pkl")
-
-########################################
-# Test for raw data sample
-########################################
-
-preprocessor = Preprocessor(['meanX', 'meanY', 'meanY'], 'label')
-X, y = preprocessor.read_raw('data/raw/old_raw_sample.csv', ['x', 'y', 'z'])
-X_train, X_test, y_train, y_test = Preprocessor.split(X, y)
-
-trainer = SvmTrainer()
-trainer.train(X_train, y_train)
-trainer.evaluate(X_test, y_test)
+print(prediction_score)
