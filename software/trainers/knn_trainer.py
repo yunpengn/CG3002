@@ -1,7 +1,7 @@
 from sklearn.externals import joblib
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
-from preprocess.preprocessor import Preprocessor
+from preprocess.train_test_processor import Preprocessor
 
 
 # kNN naturally supports multi-class classification.
