@@ -1,4 +1,5 @@
 import numpy as np
+import os
 import pandas as panda
 from sklearn.model_selection import train_test_split
 
@@ -12,12 +13,12 @@ class Preprocessor:
         data_x, data_y = self.extract_columns(data_path)
         return Preprocessor.split(data_x, data_y)
 
-    def prepare_train_all(self, all_paths):
+    def prepare_train_all(self, prefix, all_paths):
         result_x = panda.DataFrame(columns=self.x_columns)
         result_y = panda.DataFrame(columns=[self.y_column])
 
         for path in all_paths:
-            data_x, data_y = self.extract_columns(path)
+            data_x, data_y = self.extract_columns(os.path.join(prefix, path))
             result_x = result_x.append(data_x, ignore_index=True)
             result_y = result_y.append(data_y, ignore_index=True)
 
