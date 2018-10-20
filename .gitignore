@@ -1,3 +1,6 @@
+# Dataset folder
+software/data/
+
 # Mac OS-specific file
 .DS_Store
 
