@@ -5,7 +5,7 @@ python:
 install:
     - gem install awesome_bot
     - pip install pipenv
-    - pipenv sync
+    - cd software/ && pipenv sync
 
 script:
     - awesome_bot README.md --allow-dupe --allow-redirect --allow 429 --skip-save-results
