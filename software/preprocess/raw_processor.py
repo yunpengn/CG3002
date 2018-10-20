@@ -12,8 +12,6 @@ class RawProcessor:
         self.x_columns = x_columns
 
     def process(self, origin_folder, dest_folder):
-        collated_rows = []
-
         for class_name in self.classes:
             # Gets the origin & destination folder for this specific class.
             origin_class_folder = os.path.join(origin_folder, class_name)
@@ -24,7 +22,6 @@ class RawProcessor:
             # Extracts features & labels and concatenates everything together.
             for file_name in RawProcessor.get_file_names_in_folder(origin_class_folder, extension="csv"):
                 rows += self.extract_features(file_name, class_name)
-                collated_rows += rows
 
             # Creates a result data_frame
             data_frame = panda.DataFrame(rows)
@@ -35,12 +32,7 @@ class RawProcessor:
             RawProcessor.save_csv(data_frame, output_name)
             print("Stored the processing result of class %s to file at %s." % (class_name, output_name))
 
-        collated_data_frame = panda.DataFrame(collated_rows)
-        collated_output_name = os.path.join(dest_folder, "extracted_1.csv")
-        RawProcessor.save_csv(collated_data_frame, collated_output_name)
-
         print("Finished the processing of all raw data files.")
-
 
     def extract_features(self, file_path, class_name, interval=20, period=50):
         # Reads a CSV file from the given path and converts the data into pandas data-frame format.
