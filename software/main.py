@@ -1,5 +1,5 @@
 from classifiers.classifier import Classifier
-from preprocess.preprocessor import Preprocessor
+from preprocess.train_test_processor import Preprocessor
 from time import time, sleep
 from utils.result_accumulator import ResultAccumulator
 

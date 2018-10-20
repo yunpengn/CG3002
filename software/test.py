@@ -1,5 +1,5 @@
 from classifiers.classifier import Classifier
-from preprocess.preprocessor import Preprocessor
+from preprocess.train_test_processor import Preprocessor
 from trainers.svm_trainer import SvmTrainer
 from trainers.knn_trainer import KnnTrainer
 from trainers.ann_trainer import AnnTrainer
