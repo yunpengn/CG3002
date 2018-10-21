@@ -1,8 +1,7 @@
 # CG3002 AY1819 Sem1 *Dance Dance Team 09* :dancer:
 
-[![Build Status](https://travis-ci.com/yunpengn/CG3002.svg?token=pkVciw13vjdfspFfg5fy&branch=master)](https://travis-ci.com/yunpengn/CG3002)
+## Project Description
 
-## Project Description 
 This project detects labelled dance moves performed by user. \
 \
 Accomplished with the use of:
@@ -11,8 +10,9 @@ Accomplished with the use of:
 3. Machine Learning: Process raw data from sensor and output prediction
 
 ## Team Members
+
 | Name | Sub-team |
-| :---: | :---: | 
+| :---: | :---: |
 | Leow Zheng Yu | Hardware |
 | Xiang Hailin | Hardware |
 | Gauri Joshi | Software |
