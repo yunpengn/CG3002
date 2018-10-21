@@ -1,0 +1,11 @@
+language: python
+python:
+    - "3.7-dev"
+
+install:
+    - gem install awesome_bot
+    - pip install pipenv
+    - cd software/ && pipenv sync
+
+script:
+    - awesome_bot README.md --allow-dupe --allow-redirect --allow 429 --skip-save-results

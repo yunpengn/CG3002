@@ -1,5 +1,7 @@
 # CG3002 AY1819 Sem1 *Dance Dance Team 09* :dancer:
 
+[![Build Status](https://travis-ci.com/yunpengn/CG3002.svg?token=pkVciw13vjdfspFfg5fy&branch=master)](https://travis-ci.com/yunpengn/CG3002)
+
 ## Project Description 
 This project detects labelled dance moves performed by user. \
 \
