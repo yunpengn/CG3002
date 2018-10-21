@@ -34,7 +34,7 @@ class RawProcessor:
 
         print("Finished the processing of all raw data files.")
 
-    def extract_features(self, file_path, class_name, interval=20, period=50):
+    def extract_features(self, file_path, class_name, interval=20, period=100):
         # Reads a CSV file from the given path and converts the data into pandas data-frame format.
         data_frame = RawProcessor.read_csv(file_path, separator=", ")
         num_of_rows = data_frame.shape[0]
