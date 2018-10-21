@@ -4,7 +4,8 @@ from trainers.random_forest_trainer import RandomForestTrainer
 x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_legAcclX", "mean_legAcclY", "mean_legAcclZ",
              "mean_BodyX", "mean_BodyY", "mean_BodyZ",
-             "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ"]
+             "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
+             "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
 y_column = "label"
 processor = Preprocessor(x_columns, y_column)
 

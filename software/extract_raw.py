@@ -4,6 +4,7 @@ classes = ["chicken", "number7", "sidestep", "turnclap", "wipers"]
 x_columns = ["handAcclX", "handAcclY", "handAcclZ",
              "legAcclX", "legAcclY", "legAcclZ",
              "BodyX", "BodyY", "BodyZ",
-             "legGyroX", "legGyroY", "legGyroZ"]
+             "legGyroX", "legGyroY", "legGyroZ",
+             "handGyroX", "handGyroY", "handGyroZ"]
 processor = RawProcessor(classes, x_columns)
 processor.process("data/raw", "data/extract")
