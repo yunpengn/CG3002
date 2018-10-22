@@ -13,6 +13,7 @@ using namespace std::chrono;
 
 FILE * debugFp;
 steady_clock::time_point startTime;
+unsigned long lastCheckpoint = 0;
 
 inline int max(int a, int b) {
     if (a>b) return a;
@@ -27,6 +28,10 @@ void logToFile(FILE * fp, DataPacket * packet) {
             packet->handGyroX, packet->handGyroY, packet->handGyroZ, packet->legAcclX, 
             packet->legAcclY, packet->legAcclZ, packet->legGyroX, packet->legGyroY, 
             packet->legGyroZ);
+    if (millis/1000 > lastCheckpoint) {
+        lastCheckpoint = millis/1000;
+        printf("Recorded %d seconds\n", lastCheckpoint);
+    }
 }
 
 void addPacket(DataBuffer * buffer, DataPacket * packet) {
@@ -51,7 +56,7 @@ void initUtils() {
     debugFp = fopen("dataDump.csv", "w");
     fprintf(debugFp, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",
             "Time", "Energy", "Voltage", "Current", "BodyX", "BodyY", "BodyZ", "handAcclX", "handAcclY",
-            "handAcclZ", "legGyroX", "legGyroY", "legGyroZ", "legAcclX", "legAcclY",
+            "handAcclZ", "handGyroX", "handGyroY", "handGyroZ", "legAcclX", "legAcclY",
             "legAcclZ", "legGyroX", "legGyroY", "legGyroZ");
     startTime = steady_clock::now();
 }
