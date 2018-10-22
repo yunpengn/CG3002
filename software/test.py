@@ -51,9 +51,9 @@ data_lookup_table = {
 						'min_BodyX' , 'min_BodyY', 'min_BodyZ' , 
 						'min_handAcclX', 'min_handAcclY' , 'min_handAcclZ',
 						'min_legAcclX', 'min_legAcclY' , 'min_legAcclZ',
-						'std_BodyX', 'std_BodyY', 'std_BodyZ' ,
-						'std_handAcclX', 'std_handAcclY', 'std_handAcclZ',
-						'std_legAcclX','std_legAcclY','std_legAcclZ'],
+						'var_BodyX', 'var_BodyY', 'var_BodyZ' ,
+						'var_handAcclX', 'var_handAcclY', 'var_handAcclZ',
+						'var_legAcclX','var_legAcclY','var_legAcclZ'],
 		'Y_Columns' : 'label'
 	}
 
