@@ -12,7 +12,7 @@
 #include <termios.h>
 #include <boost/crc.hpp>
 #include "ArduinoCommunication.hpp"
-#include "DataPacketUtilities.hpp"
+#include "DataHandler.hpp"
 
 using namespace std;
 
@@ -69,36 +69,9 @@ const char HEADER[6] = {'H','e','a','d','e','r'};
 
 void initComms() {
     uartFilestream = setupUart();
-    packetBuffer = (DataBuffer*)malloc(sizeof(DataBuffer));
-    packetBuffer->bufferSize = 500;
-    packetBuffer->startIndex = 0;
-    packetBuffer->endIndex = 0;
-    packetBuffer->dataPacketPtrArray = (DataPacket**)malloc(500 * sizeof(DataPacket*));
 }
 
-void populatePacket(DataPacket * target, char * dataPtr) {
-    float * dataPointer = (float *) dataPtr;
-    target->energy = *dataPointer++;
-    target->voltage = *dataPointer++;
-    target->current = *dataPointer++;
-    target->bodyX = *dataPointer++;
-    target->bodyY = *dataPointer++;
-    target->bodyZ = *dataPointer++;
-    target->handAcclX = *dataPointer++;
-    target->handAcclY = *dataPointer++;
-    target->handAcclZ = *dataPointer++;
-    target->handGyroX = *dataPointer++;
-    target->handGyroY = *dataPointer++;
-    target->handGyroZ = *dataPointer++;
-    target->legAcclX = *dataPointer++;
-    target->legAcclY = *dataPointer++;
-    target->legAcclZ = *dataPointer++;
-    target->legGyroX = *dataPointer++;
-    target->legGyroY = *dataPointer++;
-    target->legGyroZ = *dataPointer++;
-}
-
-DataPacket * receiveDataPacket(int filestream) {
+void receiveDataPacket(int filestream) {
     const int dataSize = sizeof(DataPacket);
     const int crcSize = 4;
     const int totalSize = dataSize + crcSize;
@@ -107,8 +80,6 @@ DataPacket * receiveDataPacket(int filestream) {
     while (rx_length<totalSize) {
         rx_length += read(filestream, rawData + rx_length, totalSize - rx_length);
     }
-    //printf("Bytes received: %d\n", rx_length);
-    DataPacket * result = (DataPacket*)malloc(sizeof(DataPacket));
     //printf("Data pointer: %p, ", rawData);
     char * crcPointer = rawData + dataSize;
     //printf("CRC pointer: %p\n", crcPointer);
@@ -116,11 +87,9 @@ DataPacket * receiveDataPacket(int filestream) {
     boost::crc_32_type crcCalc;
     crcCalc.process_bytes(rawData, dataSize);
     if (crcCalc.checksum() == expectedCrc) {
-        populatePacket(result, rawData);
-        return result;
+        sharedBuffer.addPacket(rawData);
     } else {
         printf("CRC error: Expected 0x%08X, got 0x%08X\n", expectedCrc, crcCalc.checksum());
-        return NULL;
     }
 }
 
@@ -131,7 +100,7 @@ void receiver() {
         return;
     //----- CHECK FOR ANY RX BYTES -----
     // Read up to 255 characters from the port if they are there
-    unsigned char header_buffer[sizeof(HEADER)];
+    char header_buffer[sizeof(HEADER)];
     while (!shouldStop) {
         int rx_length = read(uartFilestream, header_buffer, 1);		//Filestream, buffer to store in, number of bytes to read (max)
         if (header_buffer[0]==HEADER[0]) {
@@ -139,10 +108,7 @@ void receiver() {
             if (rx_length!=sizeof(HEADER))
                 continue;
             else if (memcmp(HEADER, header_buffer, sizeof(HEADER)) == 0) {
-                DataPacket * data = receiveDataPacket(uartFilestream);
-                if (data != NULL) {
-                    addPacket(packetBuffer, data);
-                }
+                receiveDataPacket(uartFilestream);
             } else {
                 printf("Invalid header(%d bytes): ", rx_length);
                 for (int i = 0; i < rx_length; i++) 

@@ -15,26 +15,27 @@
 #include <string.h>
 #include <thread>
 #include <cstdio>
-#include "DataPacketUtilities.hpp"
+#include "DataHandler.hpp"
 #include "ArduinoCommunication.hpp"
+#include "MlCommunication.hpp"
 
 using namespace std;
+
+DataBuffer sharedBuffer(string(), 1000);
 
 /*
  * 
  */
 int main(int argc, char** argv) {
     initComms();
-    initUtils();
-    std::thread receiveThread (receiver);
+    init_mlCommunication();
+    thread receiveThread (receiver);
+    thread serverThread(serviceClient);
     sendChar('s');
-    char dummyChar;
-    scanf("%c", &dummyChar);
+    serverThread.join();
     signalStop();
     receiveThread.join();
     sendChar('q');
-    //closeComms();
-    closeFile();
     return 0;
 }
 

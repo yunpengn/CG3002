@@ -7,21 +7,21 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=GNU-Linux
-CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
+CND_PLATFORM_Debug=None-Linux
+CND_ARTIFACT_DIR_Debug=dist/Debug/None-Linux
 CND_ARTIFACT_NAME_Debug=rpiechoserver
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/rpiechoserver
-CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
+CND_ARTIFACT_PATH_Debug=dist/Debug/None-Linux/rpiechoserver
+CND_PACKAGE_DIR_Debug=dist/Debug/None-Linux/package
 CND_PACKAGE_NAME_Debug=rpiechoserver.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/rpiechoserver.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/None-Linux/package/rpiechoserver.tar
 # Release configuration
-CND_PLATFORM_Release=None-Windows
-CND_ARTIFACT_DIR_Release=dist/Release/None-Windows
+CND_PLATFORM_Release=MinGW-Windows
+CND_ARTIFACT_DIR_Release=dist/Release/MinGW-Windows
 CND_ARTIFACT_NAME_Release=rpiechoserver
-CND_ARTIFACT_PATH_Release=dist/Release/None-Windows/rpiechoserver
-CND_PACKAGE_DIR_Release=dist/Release/None-Windows/package
+CND_ARTIFACT_PATH_Release=dist/Release/MinGW-Windows/rpiechoserver
+CND_PACKAGE_DIR_Release=dist/Release/MinGW-Windows/package
 CND_PACKAGE_NAME_Release=rpiechoserver.tar
-CND_PACKAGE_PATH_Release=dist/Release/None-Windows/package/rpiechoserver.tar
+CND_PACKAGE_PATH_Release=dist/Release/MinGW-Windows/package/rpiechoserver.tar
 #
 # include compiler specific variables
 #

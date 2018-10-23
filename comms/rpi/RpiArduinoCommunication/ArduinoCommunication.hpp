@@ -14,7 +14,7 @@
 #ifndef ARDUINOCOMMUNICATION_HPP
 #define ARDUINOCOMMUNICATION_HPP
 
-#include "DataPacketUtilities.hpp"
+#include "DataHandler.hpp"
 
 void initComms();
 int setupUart();
