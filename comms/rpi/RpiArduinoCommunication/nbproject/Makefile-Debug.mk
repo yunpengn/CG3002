@@ -36,7 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ArduinoCommunication.o \
-	${OBJECTDIR}/DataPacketUtilities.o \
+	${OBJECTDIR}/DataHandler.o \
 	${OBJECTDIR}/MlCommunication.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/tester.o
@@ -69,27 +69,27 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/rpiarduinocommunication: ${OBJECTFILE
 ${OBJECTDIR}/ArduinoCommunication.o: ArduinoCommunication.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/C/boost_1_68_0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ArduinoCommunication.o ArduinoCommunication.cpp
+	$(COMPILE.cc) -g -I/C/boost_1_68_0 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ArduinoCommunication.o ArduinoCommunication.cpp
 
-${OBJECTDIR}/DataPacketUtilities.o: DataPacketUtilities.cpp
+${OBJECTDIR}/DataHandler.o: DataHandler.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/C/boost_1_68_0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DataPacketUtilities.o DataPacketUtilities.cpp
+	$(COMPILE.cc) -g -I/C/boost_1_68_0 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DataHandler.o DataHandler.cpp
 
 ${OBJECTDIR}/MlCommunication.o: MlCommunication.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/C/boost_1_68_0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MlCommunication.o MlCommunication.cpp
+	$(COMPILE.cc) -g -I/C/boost_1_68_0 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MlCommunication.o MlCommunication.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/C/boost_1_68_0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I/C/boost_1_68_0 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/tester.o: tester.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/C/boost_1_68_0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/tester.o tester.cpp
+	$(COMPILE.cc) -g -I/C/boost_1_68_0 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/tester.o tester.cpp
 
 # Subprojects
 .build-subprojects:
