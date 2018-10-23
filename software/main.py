@@ -7,10 +7,20 @@ if __name__ != '__main__':
     print("This module must be run as the main module.")
     exit(1)
 
-# Reads the model first and creates a preprocessor and an accumulator.
+# Reads the model first and creates a preprocessor.
+classifier = Classifier("models/random_forest.pkl")
+
+# Instantiates a result accumulator.
 accumulator = ResultAccumulator(range(12))
-classifier = Classifier("models/sample_kaggle.pkl")
-preprocessor = Preprocessor(['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'], 'Voltage')
+
+# Creates a processor for input data.
+x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
+             "mean_legAcclX", "mean_legAcclY", "mean_legAcclZ",
+             "mean_BodyX", "mean_BodyY", "mean_BodyZ",
+             "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
+             "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
+y_column = "label"
+processor = Preprocessor(x_columns, y_column)
 
 while True:
     # Starts a new iteration with current time printed out.

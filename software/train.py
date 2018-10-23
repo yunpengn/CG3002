@@ -15,3 +15,4 @@ x_train, x_test, y_train, y_test = processor.prepare_train_all("data/extract", a
 trainer = RandomForestTrainer(14)
 trainer.train(x_train, y_train)
 trainer.evaluate(x_test, y_test)
+trainer.save("models/random_forest.pkl")
