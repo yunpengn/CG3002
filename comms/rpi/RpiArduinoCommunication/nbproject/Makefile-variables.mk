@@ -7,21 +7,21 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=None-Linux
-CND_ARTIFACT_DIR_Debug=dist/Debug/None-Linux
+CND_PLATFORM_Debug=GNU-Linux
+CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
 CND_ARTIFACT_NAME_Debug=rpiarduinocommunication
-CND_ARTIFACT_PATH_Debug=dist/Debug/None-Linux/rpiarduinocommunication
-CND_PACKAGE_DIR_Debug=dist/Debug/None-Linux/package
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/rpiarduinocommunication
+CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
 CND_PACKAGE_NAME_Debug=rpiarduinocommunication.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/None-Linux/package/rpiarduinocommunication.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/rpiarduinocommunication.tar
 # Release configuration
-CND_PLATFORM_Release=None-Windows
-CND_ARTIFACT_DIR_Release=dist/Release/None-Windows
+CND_PLATFORM_Release=GNU_MinGW-Windows
+CND_ARTIFACT_DIR_Release=dist/Release/GNU_MinGW-Windows
 CND_ARTIFACT_NAME_Release=rpiarduinocommunication
-CND_ARTIFACT_PATH_Release=dist/Release/None-Windows/rpiarduinocommunication
-CND_PACKAGE_DIR_Release=dist/Release/None-Windows/package
+CND_ARTIFACT_PATH_Release=dist/Release/GNU_MinGW-Windows/rpiarduinocommunication
+CND_PACKAGE_DIR_Release=dist/Release/GNU_MinGW-Windows/package
 CND_PACKAGE_NAME_Release=rpiarduinocommunication.tar
-CND_PACKAGE_PATH_Release=dist/Release/None-Windows/package/rpiarduinocommunication.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU_MinGW-Windows/package/rpiarduinocommunication.tar
 #
 # include compiler specific variables
 #

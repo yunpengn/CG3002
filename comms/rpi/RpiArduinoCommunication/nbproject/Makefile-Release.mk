@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=None-Windows
+CND_PLATFORM=GNU_MinGW-Windows
 CND_DLIB_EXT=dll
 CND_CONF=Release
 CND_DISTDIR=dist
@@ -36,7 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ArduinoCommunication.o \
-	${OBJECTDIR}/DataPacketUtilities.o \
+	${OBJECTDIR}/DataHandler.o \
 	${OBJECTDIR}/MlCommunication.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/tester.o
@@ -71,10 +71,10 @@ ${OBJECTDIR}/ArduinoCommunication.o: ArduinoCommunication.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ArduinoCommunication.o ArduinoCommunication.cpp
 
-${OBJECTDIR}/DataPacketUtilities.o: DataPacketUtilities.cpp
+${OBJECTDIR}/DataHandler.o: DataHandler.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DataPacketUtilities.o DataPacketUtilities.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DataHandler.o DataHandler.cpp
 
 ${OBJECTDIR}/MlCommunication.o: MlCommunication.cpp
 	${MKDIR} -p ${OBJECTDIR}

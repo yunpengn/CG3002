@@ -14,7 +14,8 @@
 #ifndef MLCOMMUNICATION_HPP
 #define MLCOMMUNICATION_HPP
 
-
+void init_mlCommunication();
+void serviceClient();
 
 #endif /* MLCOMMUNICATION_HPP */
 

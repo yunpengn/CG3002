@@ -5,7 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>ArduinoCommunication.hpp</itemPath>
-      <itemPath>DataPacketUtilities.hpp</itemPath>
+      <itemPath>DataHandler.hpp</itemPath>
       <itemPath>MlCommunication.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -16,7 +16,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>ArduinoCommunication.cpp</itemPath>
-      <itemPath>DataPacketUtilities.cpp</itemPath>
+      <itemPath>DataHandler.cpp</itemPath>
       <itemPath>MlCommunication.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>tester.cpp</itemPath>
@@ -43,6 +43,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
+          <standard>8</standard>
           <incDir>
             <pElem>C:/boost_1_68_0</pElem>
           </incDir>
@@ -53,9 +54,9 @@
       </item>
       <item path="ArduinoCommunication.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="DataPacketUtilities.cpp" ex="false" tool="1" flavor2="0">
+      <item path="DataHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="DataPacketUtilities.hpp" ex="false" tool="3" flavor2="0">
+      <item path="DataHandler.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="MlCommunication.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -97,9 +98,9 @@
       </item>
       <item path="ArduinoCommunication.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="DataPacketUtilities.cpp" ex="false" tool="1" flavor2="0">
+      <item path="DataHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="DataPacketUtilities.hpp" ex="false" tool="3" flavor2="0">
+      <item path="DataHandler.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="MlCommunication.cpp" ex="false" tool="1" flavor2="0">
       </item>
