@@ -11,7 +11,7 @@ if __name__ != '__main__':
 classifier = Classifier("models/random_forest.pkl")
 
 # Instantiates a result accumulator.
-classes = ["chicken", "number7", "sidestep", "turnclap", "wipers"]
+classes = ["chicken", "number7", "sidestep", "turnclap", "wipers", "stationary"]
 accumulator = ResultAccumulator(classes, threshold=10)
 
 # Creates a processor for input data.
@@ -42,7 +42,7 @@ while True:
         elif result == "stationary":
             print("Detected as stationary state")
         else:
-            print("Going to send result to remote server.")
+            print("Going to send the result '%s' to remote server." % result)
             processor.send_result(result)
 
     # Sleeps for a certain period to wait for the next iteration to begin.

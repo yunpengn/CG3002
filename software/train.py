@@ -9,7 +9,7 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
 y_column = "label"
 processor = TrainProcessor(x_columns, y_column)
 
-all_paths = ["chicken.csv", "number7.csv", "sidestep.csv", "turnclap.csv", "wipers.csv"]
+all_paths = ["chicken.csv", "number7.csv", "sidestep.csv", "turnclap.csv", "wipers.csv", "stationary.csv"]
 x_train, x_test, y_train, y_test = processor.prepare_train_all("data/extract", all_paths)
 
 trainer = RandomForestTrainer(14)
