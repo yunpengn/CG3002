@@ -27,7 +27,7 @@ while True:
     print("Enter a new iteration of capturing: ", time())
 
     # Predicts the output according to the input.
-    input_data = processor.prepare_predict("data/stationary_sample.csv")
+    input_data = processor.get_data()
     result = classifier.predict(input_data)
     print("The prediction result is", result)
 
@@ -37,13 +37,13 @@ while True:
         accumulator.clear()
 
         # Exits from the loop if this is the logout action.
-        if result == 11:
+        if result == "logout":
             break
-        elif result == 10:
+        elif result == "stationary":
             print("Detected as stationary state")
         else:
             print("Going to send result to remote server.")
-            # [TODO] Send the result to the remove server
+            processor.send_result(result)
 
     # Sleeps for a certain period to wait for the next iteration to begin.
     sleep(0.1)
