@@ -1,5 +1,5 @@
 from classifiers.classifier import Classifier
-from preprocess.train_test_processor import Preprocessor
+from preprocess.train_processor import TrainProcessor
 from time import time, sleep
 from utils.result_accumulator import ResultAccumulator
 
@@ -20,7 +20,7 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
              "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
 y_column = "label"
-processor = Preprocessor(x_columns, y_column)
+processor = TrainProcessor(x_columns, y_column)
 
 while True:
     # Starts a new iteration with current time printed out.

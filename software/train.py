@@ -1,4 +1,4 @@
-from preprocess.train_test_processor import Preprocessor
+from preprocess.train_processor import TrainProcessor
 from trainers.random_forest_trainer import RandomForestTrainer
 
 x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
@@ -7,7 +7,7 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
              "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
 y_column = "label"
-processor = Preprocessor(x_columns, y_column)
+processor = TrainProcessor(x_columns, y_column)
 
 all_paths = ["chicken.csv", "number7.csv", "sidestep.csv", "turnclap.csv", "wipers.csv"]
 x_train, x_test, y_train, y_test = processor.prepare_train_all("data/extract", all_paths)
