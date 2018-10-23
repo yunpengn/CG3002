@@ -33,9 +33,3 @@ class TrainProcessor:
     @staticmethod
     def read_csv(file_path, separator=','):
         return panda.read_csv(file_path, separator)
-
-    def prepare_predict(self, data_path):
-        # First read the data from CSV file format to panda data-frame format.
-        data_frame = panda.read_csv(data_path, sep=', ')
-        # Gets the average of the columns we need.
-        return np.array([data_frame[column].mean() for column in self.x_columns])

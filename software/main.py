@@ -1,5 +1,5 @@
 from classifiers.classifier import Classifier
-from preprocess.train_processor import TrainProcessor
+from preprocess.test_processor import TestProcessor
 from time import time, sleep
 from utils.result_accumulator import ResultAccumulator
 
@@ -20,14 +20,14 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
              "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
 y_column = "label"
-processor = TrainProcessor(x_columns, y_column)
+processor = TestProcessor(x_columns, y_column)
 
 while True:
     # Starts a new iteration with current time printed out.
     print("Enter a new iteration of capturing: ", time())
 
     # Predicts the output according to the input.
-    input = preprocessor.prepare_predict("data/stationary_sample.csv")
+    input = processor.prepare_predict("data/stationary_sample.csv")
     result = classifier.predict(input)
     print("The prediction result is", result)
 
