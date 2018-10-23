@@ -1,6 +1,6 @@
 from classifiers.classifier import Classifier
 from preprocess.test_processor import TestProcessor
-from time import time, sleep
+from time import ctime, sleep
 from utils.result_accumulator import ResultAccumulator
 
 if __name__ != '__main__':
@@ -24,7 +24,7 @@ processor = TestProcessor(x_columns)
 
 while True:
     # Starts a new iteration with current time printed out.
-    print("Enter a new iteration of capturing: ", time())
+    print("Enter a new iteration of capturing: ", ctime())
 
     # Predicts the output according to the input.
     input_data = processor.get_data()
