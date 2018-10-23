@@ -11,7 +11,8 @@ if __name__ != '__main__':
 classifier = Classifier("models/random_forest.pkl")
 
 # Instantiates a result accumulator.
-accumulator = ResultAccumulator(range(12))
+classes = ["chicken", "number7", "sidestep", "turnclap", "wipers"]
+accumulator = ResultAccumulator(classes, threshold=5)
 
 # Creates a processor for input data.
 x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
@@ -19,16 +20,15 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_BodyX", "mean_BodyY", "mean_BodyZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
              "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
-y_column = "label"
-processor = TestProcessor(x_columns, y_column)
+processor = TestProcessor(x_columns)
 
 while True:
     # Starts a new iteration with current time printed out.
     print("Enter a new iteration of capturing: ", time())
 
     # Predicts the output according to the input.
-    input = processor.prepare_predict("data/stationary_sample.csv")
-    result = classifier.predict(input)
+    input_data = processor.prepare_predict("data/stationary_sample.csv")
+    result = classifier.predict(input_data)
     print("The prediction result is", result)
 
     # Accumulates the result and sees whether it reaches the threshold.

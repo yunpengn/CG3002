@@ -1,10 +1,10 @@
+import numpy as np
 import pandas as panda
 
 
 class TestProcessor:
-    def __init__(self, x_columns, y_column):
+    def __init__(self, x_columns):
         self.x_columns = x_columns
-        self.y_column = y_column
 
     def prepare_predict(self, data_path):
         # First read the data from CSV file format to panda data-frame format.
