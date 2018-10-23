@@ -12,7 +12,7 @@ classifier = Classifier("models/random_forest.pkl")
 
 # Instantiates a result accumulator.
 classes = ["chicken", "number7", "sidestep", "turnclap", "wipers"]
-accumulator = ResultAccumulator(classes, threshold=5)
+accumulator = ResultAccumulator(classes, threshold=10)
 
 # Creates a processor for input data.
 x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
@@ -46,7 +46,7 @@ while True:
             processor.send_result(result)
 
     # Sleeps for a certain period to wait for the next iteration to begin.
-    sleep(0.1)
+    sleep(0.2)
 
 print("Thanks for using the DanceDance system!")
 exit()
