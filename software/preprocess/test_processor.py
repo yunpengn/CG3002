@@ -1,5 +1,5 @@
 from utils.data_client import DataClient
-import numpy as np
+
 
 class TestProcessor:
     def __init__(self, x_columns):
@@ -8,7 +8,7 @@ class TestProcessor:
 
     def get_data(self):
         input_data = self.data_client.getMlData()
-        return np.array([input_data[column_name] for column_name in self.x_columns])
+        return [input_data[column_name] for column_name in self.x_columns]
 
     def send_result(self, prediction_output):
         return

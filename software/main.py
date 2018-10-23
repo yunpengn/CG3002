@@ -28,7 +28,7 @@ while True:
 
     # Predicts the output according to the input.
     input_data = processor.get_data()
-    result = classifier.predict(input_data)
+    result = classifier.predict_once(input_data)
     print("The prediction result is", result)
 
     # Accumulates the result and sees whether it reaches the threshold.
