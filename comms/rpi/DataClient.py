@@ -1,8 +1,6 @@
 import socket
 import struct
 
-from client_auth import encryptText
-
 localAddr = "127.0.0.1"
 server_port = 3002
 featurePrefixes = ("mean_", "var_", "min_", "max_")
@@ -23,18 +21,18 @@ class DataClient():
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((localAddr, server_port))
 
-    def start():
-        self.socket.send('s')
+    def start(self):
+        self.socket.send('s'.encode())
 
-    def stop():
-        self.socket.send('q')
+    def stop(self):
+        self.socket.send('q'.encode())
 
-    def getMlData():
+    def getMlData(self):
         '''
         Queries the C program for data.
         Returns the data as a dictionary
         '''
-        self.socket.send('m')
+        self.socket.send('m'.encode())
         receivedData = self.socket.recv(4*30)
         #Received data is of the following format: Mean, variance, max, min
         #Each category has 15 points corresponding to body, handAccl, handGyro, legAccl, legGyro
