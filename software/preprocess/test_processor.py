@@ -4,6 +4,8 @@ from utils.client_result import ResultClient
 
 class TestProcessor:
     def __init__(self, x_columns, server_ip, server_port, aes_key):
+        if len(aes_key) != 8 and len(aes_key) != 16 and len(aes_key) != 24:
+            raise ValueError("The AES key provided is of invalid length.")
         self.x_columns = x_columns
         self.data_client = DataClient()
         self.result_client = ResultClient(server_ip, server_port, aes_key)

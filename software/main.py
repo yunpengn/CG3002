@@ -48,6 +48,9 @@ while True:
             print("Going to send the result '%s' to remote server." % result)
             processor.send_result(result)
 
+            # Sleeps 2 seconds to give response time for the dancer.
+            sleep(2)
+
     # Sleeps for a certain period to wait for the next iteration to begin.
     sleep(0.2)
 
