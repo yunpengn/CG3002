@@ -18,6 +18,7 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <chrono>
 #include "DataHandler.hpp"
 
 const int max_length = 1;
@@ -36,7 +37,7 @@ void init_mlCommunication() {
         cerr << "Could not create socket" << endl;
         exit(-1);
     }
-    cout << "Socket created" << endl;
+    printf("Socket created\n");
      
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
@@ -50,14 +51,27 @@ void init_mlCommunication() {
         cerr << "bind failed. Error" << endl;
         exit(1);
     }
-    cout << "Bind done" << endl;
+    printf("Bind done\n");
      
     //Listen
     listen(serverSocket , 3);
 }
 
+void logToFile(float * valueArray, int numValues) {
+    static FILE * debugFp = fopen("sent_data.csv", "w");
+    using namespace std::chrono;
+    long currTimeMillis =  duration_cast<milliseconds>(steady_clock::now() - sharedBuffer.startTime).count();
+    if (numValues<1)
+        return;
+    fprintf(debugFp, "%ld", currTimeMillis);
+    for (int i=0; i<numValues; i++) {
+        fprintf(debugFp, ",%f", valueArray[i]);
+    }
+    fprintf(debugFp, "\n");
+}
+
 void serviceClient() {
-    cout << "Waiting for incoming connections... ";
+    printf("Waiting for incoming connections... \n");
      
     //accept connection from an incoming client
     sockaddr_in clientAddr;
@@ -67,19 +81,30 @@ void serviceClient() {
         cerr << "Accept failed" << endl;
         exit(1);
     }
-    cout << "Connection accepted" << endl;
+    printf("Connection accepted\n");
     char command;
     int receivedSize = recv(clientSocket, &command, 1, 0);
     while(receivedSize > 0) {
-        if (command!='m') 
-            cout << "Invalid command received: " << command << endl;
-        float dataToSend[60];
-        cout<< "Received request, collecting data... ";
-        sharedBuffer.getMeanVariance(dataToSend);
-        sharedBuffer.getMaxMin(dataToSend+30);
-        cout<< "Data collected! Sending... ";
-        send(clientSocket, dataToSend, sizeof(dataToSend), 0);
-        cout << "Data sent!" <<endl;
+        if (command=='m') {
+            float dataToSend[60];
+            //cout<< "Received request, collecting data... ";
+            sharedBuffer.getMeanVariance(dataToSend);
+            sharedBuffer.getMaxMin(dataToSend+30);
+            //cout<< "Data collected! Sending... ";
+            send(clientSocket, dataToSend, sizeof(dataToSend), 0);
+            logToFile(dataToSend, 60);
+            //cout << "Data sent!" <<endl;
+        } else if (command=='p') {
+            float dataToSend[3];
+            sharedBuffer.getPowerData(dataToSend);
+            send(clientSocket, dataToSend, sizeof(dataToSend), 0);
+            printf("Sent energy: %f, voltage: %f, current: %f\n", dataToSend[0],
+                    dataToSend[1], dataToSend[2]);
+        }
+        else {
+             cout << "Invalid command received: " << command << endl;
+        }
+        receivedSize = recv(clientSocket, &command, 1, 0);
     }
     
 }
