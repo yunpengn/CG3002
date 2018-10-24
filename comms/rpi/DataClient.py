@@ -42,4 +42,4 @@ class DataClient():
         self.socket.send('p'.encode())
         energy, voltage, current = self.socket.recv(4*3)
         power = voltage*current;
-        return {'energy': energy, 'voltage': voltage, 'current': current, 'power': power}
+        return {'cumpower': energy, 'voltage': voltage, 'current': current, 'power': power}
