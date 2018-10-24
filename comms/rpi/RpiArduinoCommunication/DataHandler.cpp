@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <string>
 #include <chrono>
+#include <float.h>
 
 void logToFile(FILE * fp, long timeMillis, DataPacket * packet);
 
@@ -115,6 +116,10 @@ void DataBuffer::getMeanVariance(float * resultArray) {
 
 void DataBuffer::getMaxMin(float * resultArray) {
     //deque<PacketWithTime> localCopy = ((const deque<PacketWithTime>)packetBuffer);
+    for (int i=0; i<15; i++)
+        resultArray[i] = FLT_MIN;
+    for (int i=15;i<30;i++)
+        resultArray[i] = FLT_MAX;
     for(int i=0; i<packetBuffer.size(); i++) {
         DataPacket packet = packetBuffer[i].data;
         if (resultArray[0]<packet.bodyX) resultArray[0] = packet.bodyX;
@@ -154,9 +159,9 @@ void DataBuffer::getMaxMin(float * resultArray) {
  */
 void DataBuffer::getPowerData(float* resultArray) {
     DataPacket latestPacket = packetBuffer.back().data;
-    resultArray[0] = latestPacket->energy;
-    resultArray[1] = latestPacket->voltage;
-    resultArray[2] = latestPacket->current;
+    resultArray[0] = latestPacket.energy;
+    resultArray[1] = latestPacket.voltage;
+    resultArray[2] = latestPacket.current;
     return;
 }
 
