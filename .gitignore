@@ -1,6 +1,9 @@
 # Dataset folder
 software/data/
 
+# Model persistence folder
+software/models/
+
 # Mac OS-specific file
 .DS_Store
 

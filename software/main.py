@@ -1,42 +1,52 @@
 from classifiers.classifier import Classifier
-from preprocess.train_test_processor import Preprocessor
-from time import time, sleep
+from preprocess.test_processor import TestProcessor
+from time import ctime, sleep
 from utils.result_accumulator import ResultAccumulator
 
 if __name__ != '__main__':
     print("This module must be run as the main module.")
     exit(1)
 
-# Reads the model first and creates a preprocessor and an accumulator.
-accumulator = ResultAccumulator(range(12))
-classifier = Classifier("models/sample_kaggle.pkl")
-preprocessor = Preprocessor(['BodyX', 'handAcclX', 'handAcclY', 'handAcclZ', 'legAcclY'], 'Voltage')
+# Reads the model first and creates a preprocessor.
+classifier = Classifier("models/random_forest.pkl")
+
+# Instantiates a result accumulator.
+classes = {"chicken": 10, "number7": 10, "sidestep": 10, "turnclap": 4, "wipers": 10, "stationary": 5}
+accumulator = ResultAccumulator(classes)
+
+# Creates a processor for input data.
+x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
+             "mean_legAcclX", "mean_legAcclY", "mean_legAcclZ",
+             "mean_BodyX", "mean_BodyY", "mean_BodyZ",
+             "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
+             "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
+processor = TestProcessor(x_columns)
 
 while True:
     # Starts a new iteration with current time printed out.
-    print("Enter a new iteration of capturing: ", time())
+    print("Enter a new iteration of capturing: ", ctime())
 
     # Predicts the output according to the input.
-    input = preprocessor.prepare_predict("data/stationary_sample.csv")
-    result = classifier.predict(input)
+    input_data = processor.get_data()
+    result = classifier.predict_once(input_data)
     print("The prediction result is", result)
 
     # Accumulates the result and sees whether it reaches the threshold.
     if accumulator.add(result):
         # Clears the accumulator.
-        accumulator.clear()
+        accumulator.clear_all()
 
         # Exits from the loop if this is the logout action.
-        if result == 11:
+        if result == "logout":
             break
-        elif result == 10:
+        elif result == "stationary":
             print("Detected as stationary state")
         else:
-            print("Going to send result to remote server.")
-            # [TODO] Send the result to the remove server
+            print("Going to send the result '%s' to remote server." % result)
+            processor.send_result(result)
 
     # Sleeps for a certain period to wait for the next iteration to begin.
-    sleep(0.1)
+    sleep(0.2)
 
 print("Thanks for using the DanceDance system!")
 exit()

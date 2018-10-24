@@ -52,7 +52,7 @@ class RawProcessor:
                 try:
                     current = data_frame[column_name][start:start + period]
                     instance['mean_' + column_name] = current.mean()
-                    instance['std_' + column_name] = current.std()
+                    instance['var_' + column_name] = current.var()
                     instance['min_' + column_name] = current.min()
                     instance['max_' + column_name] = current.max()
                 except:
@@ -72,7 +72,7 @@ class RawProcessor:
         columns = [Y_COLUMN_NAME]
         for x_name in self.x_columns:
             columns.append('mean_' + x_name)
-            columns.append('std_' + x_name)
+            columns.append('var_' + x_name)
             columns.append('min_' + x_name)
             columns.append('max_' + x_name)
 

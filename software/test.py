@@ -1,5 +1,5 @@
 from classifiers.classifier import Classifier
-from preprocess.train_test_processor import Preprocessor
+from preprocess.train_processor import TrainProcessor
 from trainers.svm_trainer import SvmTrainer
 from trainers.knn_trainer import KnnTrainer
 from trainers.ann_trainer import AnnTrainer
@@ -51,9 +51,9 @@ data_lookup_table = {
 						'min_BodyX' , 'min_BodyY', 'min_BodyZ' , 
 						'min_handAcclX', 'min_handAcclY' , 'min_handAcclZ',
 						'min_legAcclX', 'min_legAcclY' , 'min_legAcclZ',
-						'std_BodyX', 'std_BodyY', 'std_BodyZ' ,
-						'std_handAcclX', 'std_handAcclY', 'std_handAcclZ',
-						'std_legAcclX','std_legAcclY','std_legAcclZ'],
+						'var_BodyX', 'var_BodyY', 'var_BodyZ' ,
+						'var_handAcclX', 'var_handAcclY', 'var_handAcclZ',
+						'var_legAcclX','var_legAcclY','var_legAcclZ'],
 		'Y_Columns' : 'label'
 	}
 
@@ -69,7 +69,7 @@ dataset = data_lookup_table['raw_dataset_19Oct_1a']
 # Test for SVM
 ########################################
 
-preprocessor = Preprocessor(dataset['X_Columns'], dataset['Y_Columns'])
+preprocessor = TrainProcessor(dataset['X_Columns'], dataset['Y_Columns'])
 X_train, X_test, y_train, y_test = preprocessor.prepare_train(dataset['raw_data_path'])
 trainer = SvmTrainer()
 
@@ -85,7 +85,7 @@ print(prediction_score)
 # Test for KNN
 ########################################
 
-preprocessor = Preprocessor(dataset['X_Columns'], dataset['Y_Columns'])
+preprocessor = TrainProcessor(dataset['X_Columns'], dataset['Y_Columns'])
 
 X_train, X_test, y_train, y_test = preprocessor.prepare_train(dataset['raw_data_path'])
 max_knn_value = KnnTrainer.find_best_knn_value(X_train, y_train)
@@ -102,7 +102,7 @@ print(prediction_score)
 # Test for ANN
 ########################################
 
-preprocessor = Preprocessor(dataset['X_Columns'], dataset['Y_Columns'])
+preprocessor = TrainProcessor(dataset['X_Columns'], dataset['Y_Columns'])
 
 X_train, X_test, y_train, y_test = preprocessor.prepare_train(dataset['raw_data_path'])
 trainer = AnnTrainer(0.001)
@@ -118,7 +118,7 @@ print(prediction_score)
 # Test for Perceptron Trainer
 ########################################
 
-preprocessor = Preprocessor(dataset['X_Columns'], dataset['Y_Columns'])
+preprocessor = TrainProcessor(dataset['X_Columns'], dataset['Y_Columns'])
 
 X_train, X_test, y_train, y_test = preprocessor.prepare_train(dataset['raw_data_path'])
 trainer = PerceptronTrainer(10000)

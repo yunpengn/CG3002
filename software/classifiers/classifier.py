@@ -9,3 +9,6 @@ class Classifier:
 
     def predict(self, input_data):
         return self.model.predict(input_data)
+
+    def predict_once(self, input_data):
+        return self.model.predict([input_data])[0]

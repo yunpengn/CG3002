@@ -1,7 +1,7 @@
 from sklearn.externals import joblib
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
-from preprocess.train_test_processor import Preprocessor
+from preprocess.train_processor import TrainProcessor
 
 
 # kNN naturally supports multi-class classification.
@@ -28,7 +28,7 @@ class KnnTrainer:
 
     @staticmethod
     def find_best_knn_value(X, y):
-        X_train, X_test, y_train, y_test = Preprocessor.split(X, y)
+        X_train, X_test, y_train, y_test = TrainProcessor.split(X, y)
         max_knn_value = 1
         max_score = 0
 
