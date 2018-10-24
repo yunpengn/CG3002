@@ -11,8 +11,8 @@ if __name__ != '__main__':
 classifier = Classifier("models/random_forest.pkl")
 
 # Instantiates a result accumulator.
-classes = ["chicken", "number7", "sidestep", "turnclap", "wipers", "stationary"]
-accumulator = ResultAccumulator(classes, threshold=10)
+classes = {"chicken": 10, "number7": 10, "sidestep": 10, "turnclap": 4, "wipers": 10, "stationary": 5}
+accumulator = ResultAccumulator(classes)
 
 # Creates a processor for input data.
 x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
@@ -34,7 +34,7 @@ while True:
     # Accumulates the result and sees whether it reaches the threshold.
     if accumulator.add(result):
         # Clears the accumulator.
-        accumulator.clear()
+        accumulator.clear_all()
 
         # Exits from the loop if this is the logout action.
         if result == "logout":
