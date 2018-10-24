@@ -8,11 +8,13 @@ chmod +x Berryconda3-2.0.0-Linux-armv7l.sh
 ./Berryconda3-2.0.0-Linux-armv7l.sh
 
 echo "\nTrying to install all dependencies ..."
-conda install cryptography
 conda install numpy
 conda install pandas
 conda install scipy
 conda install scikit-learn
+
+echo "\nUse pip to install pycryptodome"
+pip install pycryptodome
 
 echo "\nList out all installed dependencies ..."
 conda list
