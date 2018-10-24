@@ -15,4 +15,4 @@ class TestProcessor:
     def send_result(self, prediction_output):
         power_data = self.data_client.getPowerData()
         self.result_client.sendData(prediction_output, power_data["voltage"], power_data["current"],
-                                    power_data["power"], power_data["energy"])
+                                    power_data["power"], power_data["cumpower"])
