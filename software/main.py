@@ -20,7 +20,10 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_BodyX", "mean_BodyY", "mean_BodyZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
              "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
-processor = TestProcessor(x_columns)
+server_ip = ""
+server_port = ""
+server_aes_key = ""
+processor = TestProcessor(x_columns, server_ip, server_port, server_aes_key)
 
 while True:
     # Starts a new iteration with current time printed out.
