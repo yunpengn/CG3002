@@ -2,7 +2,7 @@ import socket
 from .client_auth import encryptText
 
 
-class ResultClient():
+class ResultClient:
     def __init__(self, server_ip, server_port, aesKeyStr):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.keyStr = aesKeyStr
