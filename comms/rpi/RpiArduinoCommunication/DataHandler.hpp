@@ -36,7 +36,6 @@ class DataBuffer {
     };
     
     std::deque<PacketWithTime> packetBuffer;
-    std::chrono::steady_clock::time_point startTime;
     unsigned long windowDurationMillis;
     FILE * logFile;
     float movingTotal[15] = {}, movingTotalSq[15] = {};
@@ -44,10 +43,12 @@ class DataBuffer {
     void subtractTotal(const DataPacket &packet);
     
 public:
+    std::chrono::steady_clock::time_point startTime;
     DataBuffer(std::string fileName, long windowDurationMillis);
     void addPacket(void * rawData);
     void getMeanVariance(float * resultArray);
     void getMaxMin(float * resultArray);
+    void getPowerData(float * resultArray);
 };
 
 extern DataBuffer sharedBuffer;

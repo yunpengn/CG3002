@@ -114,9 +114,9 @@ void DataBuffer::getMeanVariance(float * resultArray) {
 }
 
 void DataBuffer::getMaxMin(float * resultArray) {
-    deque<PacketWithTime> localCopy((const deque<PacketWithTime>)packetBuffer);
-    for(int i=0; i<localCopy.size(); i++) {
-        DataPacket packet = localCopy[i].data;
+    //deque<PacketWithTime> localCopy = ((const deque<PacketWithTime>)packetBuffer);
+    for(int i=0; i<packetBuffer.size(); i++) {
+        DataPacket packet = packetBuffer[i].data;
         if (resultArray[0]<packet.bodyX) resultArray[0] = packet.bodyX;
         if (resultArray[1]<packet.bodyY) resultArray[1] = packet.bodyY;
         if (resultArray[2]<packet.bodyZ) resultArray[2] = packet.bodyZ;
@@ -148,6 +148,16 @@ void DataBuffer::getMaxMin(float * resultArray) {
         if (resultArray[28]>packet.legGyroY) resultArray[28] = packet.legGyroY;
         if (resultArray[29]>packet.legGyroZ) resultArray[29] = packet.legGyroZ;
     }
+}
+/*
+ * Puts the following values into the result Array: {Energy, Voltage, Current}
+ */
+void DataBuffer::getPowerData(float* resultArray) {
+    DataPacket latestPacket = packetBuffer.back().data;
+    resultArray[0] = latestPacket->energy;
+    resultArray[1] = latestPacket->voltage;
+    resultArray[2] = latestPacket->current;
+    return;
 }
 
 void logToFile(FILE * fp, long timeMillis, DataPacket * packet) {
