@@ -13,4 +13,6 @@ class TestProcessor:
         return [input_data[column_name] for column_name in self.x_columns]
 
     def send_result(self, prediction_output):
-        self.result_client.sendData(prediction_output, "", "", "", "")
+        power_data = self.data_client.getPowerData()
+        self.result_client.sendData(prediction_output, power_data["voltage"], power_data["current"],
+                                    power_data["power"], power_data["energy"])
