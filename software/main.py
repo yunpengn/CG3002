@@ -25,6 +25,9 @@ server_port = 3002
 server_aes_key = "0123456789abcdef"
 processor = TestProcessor(x_columns, server_ip, server_port, server_aes_key)
 
+# Sleeps to avoid the 1st iteration bug.
+sleep(58)
+
 while True:
     # Starts a new iteration with current time printed out.
     print("Enter a new iteration of capturing: ", ctime())
