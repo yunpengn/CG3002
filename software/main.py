@@ -26,7 +26,9 @@ server_aes_key = "0123456789abcdef"
 processor = TestProcessor(x_columns, server_ip, server_port, server_aes_key)
 
 # Sleeps to avoid the 1st iteration bug.
-sleep(58)
+initial_sleep_length = 58
+print("Going to sleep for %s seconds." % initial_sleep_length)
+sleep(initial_sleep_length)
 
 while True:
     # Starts a new iteration with current time printed out.
@@ -51,8 +53,8 @@ while True:
             print("Going to send the result '%s' to remote server." % result)
             processor.send_result(result)
 
-            # Sleeps 2 seconds to give response time for the dancer.
-            sleep(2)
+            # Sleeps 1.5 seconds to give response time for the dancer.
+            sleep(1.5)
 
     # Sleeps for a certain period to wait for the next iteration to begin.
     sleep(0.2)
