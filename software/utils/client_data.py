@@ -1,7 +1,7 @@
 import socket
 import struct
 
-localAddr = "192.168.137.224"
+localAddr = "localhost"
 server_port = 3002
 featurePrefixes = ("mean_", "var_", "min_", "max_")
 dataPointNames = ("BodyX", "BodyY", "BodyZ",
@@ -16,7 +16,7 @@ for prefix in featurePrefixes:
 headerNames = tuple(headerNames)
 
 
-class DataClient():
+class DataClient:
     def __init__(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((localAddr, server_port))
@@ -40,6 +40,6 @@ class DataClient():
 
     def getPowerData(self):
         self.socket.send('p'.encode())
-        energy, voltage, current = self.socket.recv(4 * 3)
+        energy, voltage, current = struct.unpack("3f", self.socket.recv(4 * 3))
         power = voltage * current
-        return {'energy': energy, 'voltage': voltage, 'current': current, 'power': power}
+        return {'cumpower': energy, 'voltage': voltage, 'current': current, 'power': power}

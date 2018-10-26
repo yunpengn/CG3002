@@ -11,7 +11,7 @@ if __name__ != '__main__':
 classifier = Classifier("models/random_forest.pkl")
 
 # Instantiates a result accumulator.
-classes = {"chicken": 10, "number7": 10, "sidestep": 10, "turnclap": 4, "wipers": 10, "stationary": 5}
+classes = {"chicken": 10, "number7": 11, "sidestep": 10, "turnclap": 4, "wipers": 5, "stationary": 5}
 accumulator = ResultAccumulator(classes)
 
 # Creates a processor for input data.
@@ -20,7 +20,15 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_BodyX", "mean_BodyY", "mean_BodyZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
              "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
-processor = TestProcessor(x_columns)
+server_ip = "192.168.137.1"
+server_port = 3002
+server_aes_key = "0123456789abcdef"
+processor = TestProcessor(x_columns, server_ip, server_port, server_aes_key)
+
+# Sleeps to avoid the 1st iteration bug.
+initial_sleep_length = 58
+print("Going to sleep for %s seconds." % initial_sleep_length)
+sleep(initial_sleep_length)
 
 while True:
     # Starts a new iteration with current time printed out.
@@ -44,6 +52,9 @@ while True:
         else:
             print("Going to send the result '%s' to remote server." % result)
             processor.send_result(result)
+
+            # Sleeps 1 seconds to give response time for the dancer.
+            sleep(1)
 
     # Sleeps for a certain period to wait for the next iteration to begin.
     sleep(0.2)
