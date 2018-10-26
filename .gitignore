@@ -4,6 +4,9 @@ software/data/
 # Model persistence folder
 software/models/
 
+# Comms remote server result CSV file(s)
+comms/server-client/*.csv
+
 # Mac OS-specific file
 .DS_Store
 
