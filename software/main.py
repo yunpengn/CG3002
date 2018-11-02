@@ -11,7 +11,7 @@ if __name__ != '__main__':
 classifier = Classifier("models/random_forest.pkl")
 
 # Instantiates a result accumulator.
-classes = {"chicken": 10, "number7": 11, "sidestep": 10, "turnclap": 4, "wipers": 5, "stationary": 5}
+classes = {"chicken": 10, "number7": 11, "sidestep": 10, "turnclap": 4, "wipers": 5, "stationary": 5, "number6": 10, "salute": 10, "mermaid": 10, "swing":10, "cowboy":10}
 accumulator = ResultAccumulator(classes)
 
 # Creates a processor for input data.
@@ -20,6 +20,7 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_BodyX", "mean_BodyY", "mean_BodyZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
              "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
+             
 server_ip = "192.168.137.1"
 server_port = 3002
 server_aes_key = "0123456789abcdef"
