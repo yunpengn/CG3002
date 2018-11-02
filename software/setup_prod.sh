@@ -7,6 +7,9 @@ echo "\nTrying to install Berry Conda ..."
 chmod +x Berryconda3-2.0.0-Linux-armv7l.sh
 ./Berryconda3-2.0.0-Linux-armv7l.sh
 
+echo "\nRefreshing the bash profile ..."
+source ~/.bashrc
+
 echo "\nTrying to install all dependencies ..."
 conda install numpy
 conda install pandas
