@@ -21,6 +21,7 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_BodyX", "mean_BodyY", "mean_BodyZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
              "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
+             
 server_ip = "192.168.137.1"
 server_port = 3002
 server_aes_key = "0123456789abcdef"
