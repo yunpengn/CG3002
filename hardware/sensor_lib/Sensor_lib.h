@@ -9,7 +9,7 @@
 #define DIGITAL_ARM_ADDR	0x69
 
 // Calibration value for digital sensor
-#define DIGITAL_ACCEL_SCALE	(16384.0 / 8.0)
+#define DIGITAL_ACCEL_SCALE	(16384.0 / 4.0)
 #define DIGITAL_GYROS_SCALE (131.0 / 8.0)
 
 // Pin define for analog accelerometer
