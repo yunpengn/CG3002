@@ -10,8 +10,8 @@ y_column = "label"
 processor = TrainProcessor(x_columns, y_column)
 
 classes = ["chicken.csv", "number7.csv", "sidestep.csv", "turnclap.csv", "wipers.csv", "stationary.csv",
-		   "cowboy.csv", "mermaid.csv", "number6.csv", "salute.csv", "swing.csv"]
-x_train, x_test, y_train, y_test = processor.prepare_train_all("data/extract", all_paths)
+           "cowboy.csv", "mermaid.csv", "number6.csv", "salute.csv", "swing.csv"]
+x_train, x_test, y_train, y_test = processor.prepare_train_all("data/extract", classes)
 
 trainer = RandomForestTrainer(14)
 trainer.train(x_train, y_train)
