@@ -9,8 +9,8 @@
 #define DIGITAL_ARM_ADDR	0x69
 
 // Calibration value for digital sensor
-#define DIGITAL_ACCEL_SCALE	16384.0
-#define DIGITAL_GYROS_SCALE 131.0
+#define DIGITAL_ACCEL_SCALE	(16384.0 / 8.0)
+#define DIGITAL_GYROS_SCALE (131.0 / 8.0)
 
 // Pin define for analog accelerometer
 #define ANALOG_X			A0
@@ -35,8 +35,7 @@ class Sensor_lib {
 		void read_digital_arm_data(float *acx_f, float *acy_f, float *acz_f, float *gyx_f, float *gyy_f, float *gyz_f);
 		void read_analog_accel_data(float *acx_f, float *acy_f, float *acz_f);
 		void read_power_data(float *voltage, float *current);
-
-	private:
+  private:
 		void setup_digital_leg();
 		void setup_digital_arm();
 		void read_digital_accel_data(int addr, float *acx_f, float *acy_f, float *acz_f, float *gyx_f, float *gyy_f, float *gyz_f);

@@ -8,12 +8,36 @@ void Sensor_lib::setup_digital_leg() {
     Wire.write(0x6B); // PWR_MGMT_1 registe
     Wire.write(0);    // set to zero (wakes up the MPU-6050), config clock to 8MHz
     Wire.endTransmission(true);
+
+    // setup Gyroscope range to 2000 degree/s
+    Wire.beginTransmission(DIGITAL_LEG_ADDR);
+    Wire.write(0x1B);
+    Wire.write(0x18);
+    Wire.endTransmission(true);
+
+    // setup Accelerometer range to 16g
+    Wire.beginTransmission(DIGITAL_LEG_ADDR);
+    Wire.write(0x1C);
+    Wire.write(0x18);
+    Wire.endTransmission(true);
 }
 
 void Sensor_lib::setup_digital_arm() {
     Wire.beginTransmission(DIGITAL_ARM_ADDR);
     Wire.write(0x6B); // PWR_MGMT_1 registe
     Wire.write(0);    // set to zero (wakes up the MPU-6050), config clock to 8MHz
+    Wire.endTransmission(true);
+
+    // setup Gyroscope range to 2000 degree/s
+    Wire.beginTransmission(DIGITAL_ARM_ADDR);
+    Wire.write(0x1B);
+    Wire.write(0x18);
+    Wire.endTransmission(true);
+
+    // setup Accelerometer range to 16g
+    Wire.beginTransmission(DIGITAL_ARM_ADDR);
+    Wire.write(0x1C);
+    Wire.write(0x18);
     Wire.endTransmission(true);
 }
 
