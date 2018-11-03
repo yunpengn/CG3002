@@ -15,10 +15,10 @@ void Sensor_lib::setup_digital_leg() {
     Wire.write(0x18);
     Wire.endTransmission(true);
 
-    // setup Accelerometer range to 16g
+    // setup Accelerometer range to 8g
     Wire.beginTransmission(DIGITAL_LEG_ADDR);
     Wire.write(0x1C);
-    Wire.write(0x18);
+    Wire.write(0x10);
     Wire.endTransmission(true);
 }
 
@@ -34,10 +34,10 @@ void Sensor_lib::setup_digital_arm() {
     Wire.write(0x18);
     Wire.endTransmission(true);
 
-    // setup Accelerometer range to 16g
+    // setup Accelerometer range to 8g
     Wire.beginTransmission(DIGITAL_ARM_ADDR);
     Wire.write(0x1C);
-    Wire.write(0x18);
+    Wire.write(0x10);
     Wire.endTransmission(true);
 }
 
