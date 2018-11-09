@@ -1,4 +1,3 @@
-import numpy as np
 import os
 import pandas as panda
 from sklearn.model_selection import train_test_split
@@ -15,7 +14,8 @@ class TrainProcessor:
         return TrainProcessor.split(data_x, data_y)
 
     def prepare_train_all(self, prefix, all_paths):
-        data_frame_all = panda.concat((TrainProcessor.read_csv(os.path.join(prefix, path))) for path in all_paths)
+        data_frame_all = panda.concat(((TrainProcessor.read_csv(os.path.join(prefix, path))) for path in all_paths),
+                                      sort=True)
         data_x, data_y = self.extract_columns(data_frame_all)
         return TrainProcessor.split(data_x, data_y)
 
