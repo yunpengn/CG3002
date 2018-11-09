@@ -12,8 +12,8 @@ if __name__ != '__main__':
 classifier = Classifier("models/random_forest.pkl")
 
 # Instantiates a result accumulator.
-classes = {"chicken": 10, "number7": 11, "sidestep": 10, "turnclap": 4, "wipers": 5, "stationary": 5,
-           "cowboy": 10, "mermaid": 13, "numbersix": 10, "salute": 10, "swing": 10, "logout": 15}
+classes = {"chicken": 6, "number7": 11, "sidestep": 10, "turnclap": 4, "wipers": 5, "stationary": 5,
+           "cowboy": 10, "mermaid": 13, "numbersix": 10, "salute": 10, "swing": 7, "logout": 18}
 accumulator = ResultAccumulator(classes)
 
 # Creates a processor for input data.
@@ -49,6 +49,7 @@ while True:
 
         # Exits from the loop if this is the logout action.
         if result == "logout":
+            processor.send_result(result)
             break
         elif result == "stationary":
             print("Detected as stationary state")
