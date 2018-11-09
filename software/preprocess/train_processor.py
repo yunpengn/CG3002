@@ -1,4 +1,3 @@
-import numpy as np
 import os
 import pandas as panda
 from sklearn.model_selection import train_test_split

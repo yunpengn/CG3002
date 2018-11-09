@@ -1,6 +1,8 @@
 from preprocess.raw_processor import RawProcessor
 
-classes = ["chicken", "number7", "sidestep", "turnclap", "wipers", "stationary", "number6", "salute", "mermaid", "swing", "cowboy"]
+
+classes = ["chicken", "cowboy", "logout", "mermaid", "numbersix", "number7", "salute",
+           "sidestep", "swing", "stationary", "turnclap", "wipers"]
 x_columns = ["handAcclX", "handAcclY", "handAcclZ",
              "legAcclX", "legAcclY", "legAcclZ",
              "BodyX", "BodyY", "BodyZ",
