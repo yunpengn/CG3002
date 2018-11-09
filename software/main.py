@@ -1,6 +1,7 @@
 from classifiers.classifier import Classifier
 from preprocess.test_processor import TestProcessor
 from time import ctime, sleep
+from sys import exit
 from utils.result_accumulator import ResultAccumulator
 
 if __name__ != '__main__':
