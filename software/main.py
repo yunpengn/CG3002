@@ -29,7 +29,7 @@ server_aes_key = "0123456789abcdef"
 processor = TestProcessor(x_columns, server_ip, server_port, server_aes_key)
 
 # Sleeps to avoid the 1st-iteration bug.
-initial_sleep_length = 57
+initial_sleep_length = 56
 for i in range(initial_sleep_length):
     print("Going to sleep for %s seconds." % (initial_sleep_length - i))
     sleep(1)
