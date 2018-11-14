@@ -28,10 +28,11 @@ server_port = 3002
 server_aes_key = "0123456789abcdef"
 processor = TestProcessor(x_columns, server_ip, server_port, server_aes_key)
 
-# Sleeps to avoid the 1st iteration bug.
+# Sleeps to avoid the 1st-iteration bug.
 initial_sleep_length = 58
-print("Going to sleep for %s seconds." % initial_sleep_length)
-sleep(initial_sleep_length)
+for i in range(initial_sleep_length):
+    print("Going to sleep for %s seconds." % (initial_sleep_length - i))
+    sleep(1)
 
 while True:
     # Starts a new iteration with current time printed out.
