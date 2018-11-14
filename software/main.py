@@ -13,7 +13,7 @@ classifier = Classifier("models/random_forest.pkl")
 
 # Instantiates a result accumulator.
 classes = {"chicken": 5, "number7": 11, "sidestep": 10, "turnclap": 4, "wipers": 5, "stationary": 5,
-           "cowboy": 8, "mermaid": 13, "numbersix": 10, "salute": 10, "swing": 7, "logout": 14}
+           "cowboy": 8, "mermaid": 13, "numbersix": 8, "salute": 10, "swing": 7, "logout": 14}
 accumulator = ResultAccumulator(classes)
 
 # Creates a processor for input data.
@@ -29,7 +29,7 @@ server_aes_key = "0123456789abcdef"
 processor = TestProcessor(x_columns, server_ip, server_port, server_aes_key)
 
 # Sleeps to avoid the 1st-iteration bug.
-initial_sleep_length = 56
+initial_sleep_length = 55
 for i in range(initial_sleep_length):
     print("Going to sleep for %s seconds." % (initial_sleep_length - i))
     sleep(1)
