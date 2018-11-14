@@ -50,6 +50,7 @@ while True:
 
         # Exits from the loop if this is the logout action.
         if result == "logout":
+            print("Going to send logout to remote server. Finished dancing!")
             processor.send_result(result)
             break
         elif result == "stationary":
