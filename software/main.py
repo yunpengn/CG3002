@@ -63,5 +63,7 @@ while True:
     # Sleeps for a certain period to wait for the next iteration to begin.
     sleep(0.2)
 
+# Sleeps for a certain period before exit to be safe.
+sleep(3)
 print("Thanks for using the DanceDance system!")
 exit()
