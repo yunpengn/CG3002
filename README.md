@@ -11,6 +11,8 @@ Accomplished with the use of:
 2. Raspberry Pi: Load sensor values to Machine Learning model, send prediction to server
 3. Machine Learning: Process raw data from sensor and output prediction
 
+For more instructions on the software component, please see [here](software/README.md).
+
 ## Team Members
 
 | Name | Sub-team |
