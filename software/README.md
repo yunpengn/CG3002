@@ -28,7 +28,7 @@ or
 ```bash
 pip3 --version
 ```
-- Make sure you have [Homebrew]() installed.
+- Make sure you have [Homebrew](https://brew.sh) installed.
 ```bash
 brew -v
 ```
