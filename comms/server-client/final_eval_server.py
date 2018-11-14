@@ -35,12 +35,12 @@ class Server(threading.Thread):
                         'number7', 'number7', 'number7', 'number7',
                         'chicken', 'chicken', 'chicken', 'chicken',
                         'sidestep', 'sidestep', 'sidestep', 'sidestep',
-                        'turnclap', 'turnclap', 'turnclap', 'turnclap']
-        #           'numbersix', 'numbersix', 'numbersix', 'numbersix',
-        #           'salute', 'salute', 'salute', 'salute',
-        #           'mermaid', 'mermaid', 'mermaid', 'mermaid',
-        #           'swing', 'swing', 'swing', 'swing',
-        #           'cowboy', 'cowboy', 'cowboy', 'cowboy']
+                        'turnclap', 'turnclap', 'turnclap', 'turnclap',
+                   'numbersix', 'numbersix', 'numbersix', 'numbersix',
+                   'salute', 'salute', 'salute', 'salute',
+                   'mermaid', 'mermaid', 'mermaid', 'mermaid',
+                   'swing', 'swing', 'swing', 'swing',
+                   'cowboy', 'cowboy', 'cowboy', 'cowboy']
         
         self.n_moves = len(self.actions)
         self.indices = np.arange(self.n_moves)
