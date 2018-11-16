@@ -12,8 +12,8 @@ if __name__ != '__main__':
 classifier = Classifier("models/random_forest.pkl")
 
 # Instantiates a result accumulator.
-classes = {"chicken": 6, "number7": 11, "sidestep": 10, "turnclap": 4, "wipers": 5, "stationary": 5,
-           "cowboy": 10, "mermaid": 13, "numbersix": 10, "salute": 10, "swing": 7, "logout": 18}
+classes = {"chicken": 5, "number7": 11, "sidestep": 10, "turnclap": 4, "wipers": 5, "stationary": 5,
+           "cowboy": 7, "mermaid": 13, "numbersix": 8, "salute": 10, "swing": 7, "logout": 14}
 accumulator = ResultAccumulator(classes)
 
 # Creates a processor for input data.
@@ -22,16 +22,17 @@ x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
              "mean_BodyX", "mean_BodyY", "mean_BodyZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
              "mean_handGyroX", "mean_handGyroY", "mean_handGyroZ"]
-             
+
 server_ip = "192.168.137.1"
 server_port = 3002
 server_aes_key = "0123456789abcdef"
 processor = TestProcessor(x_columns, server_ip, server_port, server_aes_key)
 
-# Sleeps to avoid the 1st iteration bug.
-initial_sleep_length = 58
-print("Going to sleep for %s seconds." % initial_sleep_length)
-sleep(initial_sleep_length)
+# Sleeps to avoid the 1st-iteration bug.
+initial_sleep_length = 55
+for i in range(initial_sleep_length):
+    print("Going to sleep for %s seconds." % (initial_sleep_length - i))
+    sleep(1)
 
 while True:
     # Starts a new iteration with current time printed out.
@@ -49,6 +50,7 @@ while True:
 
         # Exits from the loop if this is the logout action.
         if result == "logout":
+            print("Going to send logout to remote server. Finished dancing!")
             processor.send_result(result)
             break
         elif result == "stationary":
@@ -63,5 +65,7 @@ while True:
     # Sleeps for a certain period to wait for the next iteration to begin.
     sleep(0.2)
 
+# Sleeps for a certain period before exit to be safe.
+sleep(3)
 print("Thanks for using the DanceDance system!")
 exit()
