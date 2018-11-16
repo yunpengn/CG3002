@@ -18,7 +18,6 @@ accumulator = ResultAccumulator(classes)
 
 # Creates a processor for input data.
 x_columns = ["mean_handAcclX", "mean_handAcclY", "mean_handAcclZ",
-             "max_handAcclX", "max_handAcclY", "max_handAcclZ",
              "mean_legAcclX", "mean_legAcclY", "mean_legAcclZ",
              "mean_BodyX", "mean_BodyY", "mean_BodyZ",
              "mean_legGyroX", "mean_legGyroY", "mean_legGyroZ",
