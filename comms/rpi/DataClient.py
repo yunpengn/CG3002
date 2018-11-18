@@ -1,7 +1,8 @@
 import socket
 import struct
 
-localAddr = "192.168.137.224"
+localAddr = "127.0.0.1"
+rpiAddr = "raspberrypi.mshome.net"
 server_port = 3002
 featurePrefixes = ("mean_", "var_", "min_", "max_")
 dataPointNames = ("BodyX", "BodyY", "BodyZ",
@@ -19,7 +20,7 @@ class DataClient():
 
     def __init__(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.connect((localAddr, server_port))
+        self.socket.connect((rpiAddr, server_port))
 
     def start(self):
         self.socket.send('s'.encode())
