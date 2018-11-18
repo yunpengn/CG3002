@@ -1,0 +1,41 @@
+timestamp,action,goal,time_delta,correct,voltage,current,power,cumpower
+1537516184.9964435, wipers,wipers,3.707367181777954,False,voltage1,curremt1,power1,cumpower1
+1537516189.36463, turnclap,turnclap,4.346140384674072,False,voltage2,curremt2,power2,cumpower2
+1537516192.154304, chicken,chicken,2.778704881668091,False,voltage3,curremt3,power3,cumpower3
+1537516194.0432744, chicken,chicken,1.875464677810669,False,voltage4,curremt4,power4,cumpower4
+1537516197.1550777, number7,number7,3.072906970977783,False,voltage5,curremt5,power5,cumpower5
+1537516200.3882651, number7,number7,3.216679573059082,False,voltage6,curremt6,power6,cumpower6
+1537516202.8744495, adhjlaskjksajd,sidestep,2.4705042839050293,False,voltage7,curremt7,power7,cumpower7
+1537516206.6755402, turnclap,turnclap,3.7880940437316895,False,voltage8,curremt8,power8,cumpower8
+1537516210.3135066, sidestep,sidestep,3.6260275840759277,False,voltage9,curremt9,power9,cumpower9
+1537516219.3027318, number7,number7,8.974884748458862,False,voltage10,curremt10,power10,cumpower10
+1537516220.9132805, wipers,wipers,1.5966172218322754,False,voltage11,curremt11,power11,cumpower11
+1537516225.1616595, number7,number7,4.235782146453857,False,voltage12,curremt12,power12,cumpower12
+1537516227.054614, sidestep,sidestep,1.8787026405334473,False,voltage13,curremt13,power13,cumpower13
+1537516228.8848293, turnclap,turnclap,1.8122303485870361,False,voltage14,curremt14,power14,cumpower14
+1537516230.7029917, chicken,chicken,1.8047993183135986,False,voltage15,curremt15,power15,cumpower15
+1537516232.0652218, wipers,wipers,1.3507659435272217,False,voltage16,curremt16,power16,cumpower16
+1537516233.7533543, chicken,chicken,1.673886775970459,False,voltage17,curremt17,power17,cumpower17
+1537516235.2458262, wipers,wipers,1.4805052280426025,False,voltage18,curremt18,power18,cumpower18
+1537516237.0029497, turnclap,turnclap,1.7451577186584473,False,voltage19,curremt19,power19,cumpower19
+1537516239.6142232, sidestep,sidestep,2.599304437637329,False,voltage20,curremt20,power20,cumpower20
+1537516241.3626842, turnclap,turnclap,1.734499454498291,False,voltage21,curremt21,power21,cumpower21
+1537516243.723227, turnclap,turnclap,2.3485770225524902,False,voltage22,curremt22,power22,cumpower22
+1537516245.572052, turnclap,turnclap,1.835787296295166,False,voltage23,curremt23,power23,cumpower23
+1537516248.432584, turnclap,turnclap,2.8216350078582764,False,voltage24,curremt24,power24,cumpower24
+1537516249.982337, logout,turnclap,1.537538766860962,False,voltage25,curremt25,power25,cumpower25
+1537516668.1389346,None,turnclap,418.1436343193054,False,0,0,0,0
+1537516759.399986, turnclap,turnclap,7.053707122802734,False,voltage1,curremt1,power1,cumpower1
+1537516768.6591296, wipers,wipers,9.244954586029053,False,voltage2,curremt2,power2,cumpower2
+1537516773.3900204, turnclap,sidestep,4.719216585159302,False,voltage3,curremt3,power3,cumpower3
+1537516782.0110357, logout,chicken,8.608079195022583,False,voltage4,curremt4,power4,cumpower4
+1537516842.030858,None,wipers,60.00594711303711,False,0,0,0,0
+1537517060.1719384,wipers,wipers,1.9335017204284668,True,voltage1,curremt1,power1,cumpower1
+1537517062.1422462,chicken,chicken,1.9622418880462646,True,voltage2,curremt2,power2,cumpower2
+1537517064.5721834,sidestep,sidestep,2.423955202102661,True,voltage3,curremt3,power3,cumpower3
+1537517066.5713623,number7,number7,1.9926793575286865,True,voltage4,curremt4,power4,cumpower4
+1537517068.6424806,sidestep,sidestep,2.064089775085449,True,voltage5,curremt5,power5,cumpower5
+1537517071.0541382,number7,number7,2.4060089588165283,True,voltage6,curremt6,power6,cumpower6
+1537517461.595437,sidestep,sidestep,8.791873693466187,True,voltage1,curremt1,power1,cumpower1
+1537517465.7564979,chicken,chicken,4.13409948348999,True,voltage2,curremt2,power2,cumpower2
+1537517468.111851,chicken,chicken,2.343454360961914,True,voltage3,curremt3,power3,cumpower3
