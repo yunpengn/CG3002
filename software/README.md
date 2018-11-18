@@ -63,10 +63,3 @@ We will strictly follow Python's official style guide as specified [here](https:
 
 - Use 4 spaces per indentation level (spaces are the preferred indentation method).
 - 2 blank lines between import statements and class name line.
-
-## How to use this project
-
-- First, put all data under `data/raw`;
-- Then, run `extract_raw.py` to extract features into `data/extract`;
-- After that, run `train.py` to train the model (which will be stored under the `model` folder);
-- During demo, run `main.py` to predict.
