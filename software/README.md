@@ -68,5 +68,5 @@ We will strictly follow Python's official style guide as specified [here](https:
 
 - First, put all data under `data/raw`;
 - Then, run `extract_raw.py` to extract features into `data/extract`;
-- After that, run `train.py` to train the model;
+- After that, run `train.py` to train the model (which will be stored under the `model` folder);
 - During demo, run `main.py` to predict.
