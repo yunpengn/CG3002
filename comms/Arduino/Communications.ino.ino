@@ -9,6 +9,8 @@ Sensor_lib sensors = Sensor_lib();
 
 float AcX, AcY, AcZ, GyX, GyY, GyZ, voltage, current;
 float legAcX, legAcY, legAcZ, legGyX, legGyY, legGyZ;
+float powerbefore = 0; 
+float powerafter, zero;
 float energy;
 CRC32 crc;
 int numBytes = 0;
@@ -32,28 +34,33 @@ void sensorTask(void *p)
   Serial.println("In Sensor Task");   
   boolean flag = 0;
   int i = 0;
-  float prevEnergy, totalEnergy, prevTime, Time = 0;
+  float totalEnergy, prevTime, Time = 0;
+  int count = 0;
   uint32_t checksum;
   
   unsigned long iterationNum = 0;
   
   while(1){
     
-  /*  
-    if (iterationNum%100==0) {
+    /*
+    if (iterationNum%1000==0) {
       Serial.print("Started loop iteration ");
       Serial.print(++iterationNum);
       Serial.print("\n");
     }
     */
+    
     iterationNum++;
     if((Serial1.available() > 0)){
       char x = Serial1.read();
       if(x == 's'){
-        Serial.print("Start signal caught\n");
+        //Serial.print("Start signal caught\n");
         flag = 1;
+        totalEnergy = 0;
+        powerbefore = 0;
+        prevTime = millis();
       } else if(x == 'q'){
-        Serial.print("Stop signal caught\n");
+        //Serial.print("Stop signal caught\n");
         flag = 0;
       }
     }
@@ -62,30 +69,24 @@ void sensorTask(void *p)
       numBytes = 0;
       crc.reset();
       Serial1.write(HEADER, 6);
-      //Serial.println("Starting to read from sensors\n");
       
       sensors.read_power_data(&voltage,&current);
       Time = millis();
-      //Serial.print("b\n");
-      energy = voltage * current * (Time - prevTime);
-      //Serial.println(voltage);
-      //Serial.println(current);
-      //Serial.println(Time);
-      //Serial.println(prevTime);
-      //Serial.println(energy);
-      if(prevEnergy != 0){
-        totalEnergy += (energy + prevEnergy) / 2.0;
-        //Serial.print("a\n");
+      powerafter = voltage * current;
+      if(powerbefore == 0.0){
+      energy = ( powerafter * (Time - prevTime) / 1000.0);
       } else {
-        totalEnergy += energy;
+      energy = ((powerbefore + powerafter) / 2.0) * (Time - prevTime)/ 1000.0;
       }
-      //Serial.println(totalEnergy);
+      //Serial.println(voltage); Serial.println(current); Serial.println(Time); Serial.println(prevTime); Serial.println(energy);
+      totalEnergy += energy;
+      powerbefore = powerafter;
       prevTime = Time;
-      prevEnergy = energy;
+      
+      //Serial.print(Time); Serial.print(" "); Serial.print(prevTime); Serial.print(" "); Serial.print(energy); Serial.print(" "); Serial.println(totalEnergy);
       sendFloat(totalEnergy);
       sendFloat(voltage);
       sendFloat(current);
-      //Serial.println(totalEnergy);
       
       sensors.read_analog_accel_data(&AcX,&AcY,&AcZ);
       sendFloat(AcX);
@@ -99,6 +100,11 @@ void sensorTask(void *p)
       sendFloat(GyX);
       sendFloat(GyY);
       sendFloat(GyZ);
+
+      /*
+      Serial.print(AcX, 4); Serial.print(" "); Serial.print(AcY, 4); Serial.print(" "); Serial.print(AcZ, 4); Serial.print(" ");
+      Serial.print(GyX, 4); Serial.print(" "); Serial.print(GyY, 4); Serial.print(" "); Serial.println(GyZ, 4);
+      */
       
       sensors.read_digital_leg_data(&legAcX,&legAcY,&legAcZ,&legGyX,&legGyY,&legGyZ);
       sendFloat(legAcX);
@@ -107,10 +113,15 @@ void sensorTask(void *p)
       sendFloat(legGyX);
       sendFloat(legGyY);
       sendFloat(legGyZ);
+
+      /*
+      Serial.print(AcX, 4); Serial.print(" "); Serial.print(AcY, 4); Serial.print(" "); Serial.print(AcZ, 4); Serial.print(" ");
+      Serial.print(GyX, 4); Serial.print(" "); Serial.print(GyY, 4); Serial.print(" "); Serial.println(GyZ, 4);
+      */
+      
       checksum = crc.finalize();
       sendU(checksum);
-      //Serial.println(checksum, HEX);
-      //Serial.println(numBytes);
+      //Serial.println(checksum, HEX); Serial.println(numBytes);
     }
     //vTaskDelay(1 / portTICK_PERIOD_MS); //Block for 1 ms
   }
@@ -122,7 +133,7 @@ void setup()
   // put your setup code here, to run once:
   Serial1.begin(2000000); 
   Serial.begin(9600); // opens serial port, sets data rate to 9600
-  //sensors.initial_setup();
+  sensors.initial_setup();
   xTaskCreate(sensorTask, //Pointer to the task entry function
               "sensorTask", //Task name
               STACK_SIZE, //Stack size
