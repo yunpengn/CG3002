@@ -17,6 +17,7 @@
 #include <chrono>
 #include <deque>
 #include <string>
+#include <mutex>
 
 struct DataPacket{
     float energy;
@@ -36,6 +37,7 @@ class DataBuffer {
     };
     
     std::deque<PacketWithTime> packetBuffer;
+    std::mutex bufferMutex;
     unsigned long windowDurationMillis;
     FILE * logFile;
     float movingTotal[15] = {}, movingTotalSq[15] = {};

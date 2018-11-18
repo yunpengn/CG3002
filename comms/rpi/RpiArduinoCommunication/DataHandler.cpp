@@ -10,6 +10,7 @@
 #include <string>
 #include <chrono>
 #include <float.h>
+#include <mutex>
 
 void logToFile(FILE * fp, long timeMillis, DataPacket * packet);
 
@@ -97,10 +98,12 @@ void DataBuffer::addPacket(void * rawData) {
     packetBuffer.push_back(packet);
     addTotal(packet.data);
     long earliestValidTimeMillis = max(currTimeMillis - windowDurationMillis, (unsigned long)0);
+    bufferMutex.lock();
     while(packetBuffer.front().timeMillis < earliestValidTimeMillis) {
         subtractTotal(packetBuffer.front().data);
         packetBuffer.pop_front();
     }
+    bufferMutex.unlock();
     logToFile(logFile, currTimeMillis, &(packet.data));
 }
 
@@ -115,13 +118,15 @@ void DataBuffer::getMeanVariance(float * resultArray) {
 }
 
 void DataBuffer::getMaxMin(float * resultArray) {
-    //deque<PacketWithTime> localCopy = ((const deque<PacketWithTime>)packetBuffer);
+    bufferMutex.lock();
+    deque<PacketWithTime> localCopy = deque<PacketWithTime>((const deque<PacketWithTime>)packetBuffer);
+    bufferMutex.unlock();
     for (int i=0; i<15; i++)
-        resultArray[i] = FLT_MIN;
+        resultArray[i] = -99999999;
     for (int i=15;i<30;i++)
-        resultArray[i] = FLT_MAX;
+        resultArray[i] = 99999999;
     for(int i=0; i<packetBuffer.size(); i++) {
-        DataPacket packet = packetBuffer[i].data;
+        DataPacket packet = localCopy[i].data;
         if (resultArray[0]<packet.bodyX) resultArray[0] = packet.bodyX;
         if (resultArray[1]<packet.bodyY) resultArray[1] = packet.bodyY;
         if (resultArray[2]<packet.bodyZ) resultArray[2] = packet.bodyZ;
